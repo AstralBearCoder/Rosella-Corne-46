@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <!-- Ajout de la meta viewport pour la compatibilité mobile/tablette -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>40 to 46-key with Rosella Layout</title>
     <style>
         :root {
@@ -27,27 +29,48 @@
             color: #eee;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 40px;
+            padding: 20px; /* Réduit pour mobile */
             display: flex;
             flex-direction: column;
             align-items: center;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+            body { padding: 40px; }
         }
 
         .intro-card {
             background: var(--bg-card);
             border-radius: 20px;
-            padding: 35px;
+            padding: 20px;
             width: 100%;
             max-width: 1200px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 30px auto;
             border: 1px solid #222;
             box-shadow: 0 10px 40px rgba(0,0,0,0.6);
             box-sizing: border-box;
         }
 
-        .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
-        .header-top h1 { margin: 0; font-size: 2.2rem; font-weight: 600; letter-spacing: -1px; }
-        .header-top p { margin: 5px 0 0 0; color: #999; font-size: 1.1rem; }
+        @media (min-width: 768px) {
+            .intro-card { padding: 35px; margin-bottom: 50px; }
+        }
+
+        .header-top {
+            display: flex;
+            flex-direction: column; /* Stack sur mobile */
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .header-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+        }
+
+        .header-top h1 { margin: 0; font-size: 1.6rem; font-weight: 600; letter-spacing: -1px; }
+        @media (min-width: 768px) { .header-top h1 { font-size: 2.2rem; } }
+
+        .header-top p { margin: 5px 0 0 0; color: #999; font-size: 0.95rem; }
 
         .badge {
             background: var(--accent-nav);
@@ -57,38 +80,52 @@
             font-weight: 800;
             font-size: 0.8rem;
             text-transform: uppercase;
+            align-self: flex-start;
         }
 
         .dashboard-main {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
+            grid-template-columns: 1fr; /* 1 colonne mobile */
+            gap: 30px;
             border-top: 1px solid #222;
             padding-top: 30px;
             align-items: center;
         }
 
+        @media (min-width: 992px) {
+            .dashboard-main { grid-template-columns: 1fr 1.5fr; gap: 40px; }
+        }
+
         .stats-box table { width: 100%; border-collapse: collapse; }
         .stats-box th { text-align: left; color: #aaa; font-size: 0.75rem; text-transform: uppercase; padding-bottom: 15px; }
-        .stats-box td { padding: 12px 0; border-bottom: 1px solid #222; font-size: 1rem; }
+        .stats-box td { padding: 12px 0; border-bottom: 1px solid #222; font-size: 0.9rem; }
         .lang { color: var(--accent-nav); font-weight: 500; }
 
-        .ortho-box { background: var(--bg-inset); padding: 25px; border-radius: 12px; }
+        .ortho-box { background: var(--bg-inset); padding: 20px; border-radius: 12px; overflow-x: auto; }
         .ortho-title { font-size: 0.8rem; color: #aaa; text-transform: uppercase; margin-bottom: 20px; display: block; text-align: center; font-weight: 600; }
+
         .ortho-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr) 25px repeat(5, 1fr);
-            gap: 6px;
+            grid-template-columns: repeat(5, 1fr) 15px repeat(5, 1fr);
+            gap: 4px;
+            min-width: 300px; /* Empêche l'écrasement total */
             max-width: 500px;
             margin: 0 auto;
         }
+
+        @media (min-width: 768px) {
+            .ortho-grid { gap: 6px; grid-template-columns: repeat(5, 1fr) 25px repeat(5, 1fr); }
+        }
+
         .ortho-key {
             aspect-ratio: 1;
             background: #252525;
             border: 1px solid #333;
             display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; color: #ccc; border-radius: 4px;
+            font-size: 0.8rem; color: #ccc; border-radius: 4px;
         }
+        @media (min-width: 768px) { .ortho-key { font-size: 0.9rem; } }
+
         .ortho-gap { grid-column: 6; }
 
         .f-p { background-color: var(--f-pinky); border-color: rgba(255,100,100,0.3); }
@@ -98,25 +135,34 @@
 
         .kb-section {
             background: var(--bg-card);
-            padding: 35px;
+            padding: 15px;
             border-radius: 15px;
             border: 1px solid #1a1a1a;
+            box-sizing: border-box;
+            width: 100%;
         }
-        .kb-section.full { width: 100%; max-width: 1200px; margin-bottom: 60px; box-sizing: border-box; }
+        @media (min-width: 768px) { .kb-section { padding: 35px; } }
+
+        .kb-section.full { width: 100%; max-width: 1200px; margin-bottom: 30px; }
+        @media (min-width: 768px) { .kb-section.full { margin-bottom: 60px; } }
 
         .layers-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1fr; /* 1 colonne mobile */
+            gap: 20px;
             width: 100%;
             max-width: 1200px;
             box-sizing: border-box;
         }
 
+        @media (min-width: 992px) {
+            .layers-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+        }
+
         .layer-title {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             color: var(--text-main);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-align: center;
@@ -124,9 +170,10 @@
             padding-bottom: 15px;
             font-weight: 600;
         }
+        @media (min-width: 768px) { .layer-title { font-size: 1.1rem; margin-bottom: 30px; } }
 
         /* --- SVG STYLING --- */
-        svg { width: 100%; height: auto; }
+        svg { width: 100%; height: auto; display: block; }
         rect { fill: var(--key-fill); stroke: var(--stroke); stroke-width: 0.6px; }
         text { fill: #888; font-size: 17px; text-anchor: middle; dominant-baseline: middle; }
 
@@ -337,7 +384,7 @@
     <!-- 2x2 GRID -->
     <div class="layers-grid">
         <div class="kb-section layer-normal">
-            <div class="layer-title">1. Alpha Layer<Base></div>
+            <div class="layer-title">1. Alpha Layer</div>
             <div class="target"></div>
         </div>
         <div class="kb-section layer-acc">
