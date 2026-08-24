@@ -16,14 +16,11 @@
             --text-main: #eee;
             --key-fill: #222;
             --stroke: #333;
-
-            /* Couleurs doigts Ortho (Léger) */
             --f-pinky: rgba(255, 100, 100, 0.12);
             --f-ring: rgba(255, 200, 100, 0.12);
             --f-middle: rgba(100, 255, 100, 0.12);
             --f-index: rgba(100, 150, 255, 0.18);
         }
-
         body {
             background-color: var(--bg-page);
             color: #eee;
@@ -34,7 +31,6 @@
             flex-direction: column;
             align-items: center;
         }
-
         .intro-card {
             background: var(--bg-card);
             border-radius: 20px;
@@ -46,11 +42,9 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.6);
             box-sizing: border-box;
         }
-
         .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
         .header-top h1 { margin: 0; font-size: 2.2rem; font-weight: 600; letter-spacing: -1px; }
         .header-top p { margin: 5px 0 0 0; color: #999; font-size: 1.1rem; }
-
         .badge {
             background: var(--accent-nav);
             color: #000;
@@ -60,7 +54,6 @@
             font-size: 0.8rem;
             text-transform: uppercase;
         }
-
         .dashboard-main {
             display: grid;
             grid-template-columns: 1fr 1.5fr;
@@ -69,12 +62,10 @@
             padding-top: 30px;
             align-items: center;
         }
-
         .stats-box table { width: 100%; border-collapse: collapse; }
         .stats-box th { text-align: left; color: #aaa; font-size: 0.75rem; text-transform: uppercase; padding-bottom: 15px; }
         .stats-box td { padding: 12px 0; border-bottom: 1px solid #222; font-size: 1rem; }
         .lang { color: var(--accent-nav); font-weight: 500; }
-
         .ortho-box { background: var(--bg-inset); padding: 25px; border-radius: 12px; }
         .ortho-title { font-size: 0.8rem; color: #aaa; text-transform: uppercase; margin-bottom: 20px; display: block; text-align: center; font-weight: 600; }
         .ortho-grid {
@@ -92,12 +83,10 @@
             font-size: 0.9rem; color: #ccc; border-radius: 4px;
         }
         .ortho-gap { grid-column: 6; }
-
         .f-p { background-color: var(--f-pinky); border-color: rgba(255,100,100,0.3); }
         .f-r { background-color: var(--f-ring); border-color: rgba(255,200,100,0.3); }
         .f-m { background-color: var(--f-middle); border-color: rgba(100,255,100,0.3); }
         .f-i { background-color: var(--f-index); border-color: rgba(100,150,255,0.4); }
-
         .kb-section {
             background: var(--bg-card);
             padding: 35px;
@@ -105,7 +94,6 @@
             border: 1px solid #1a1a1a;
         }
         .kb-section.full { width: 100%; max-width: 1200px; margin-bottom: 60px; box-sizing: border-box; }
-
         .layers-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -114,7 +102,6 @@
             max-width: 1200px;
             box-sizing: border-box;
         }
-
         .layer-title {
             font-size: 1.1rem;
             color: var(--text-main);
@@ -126,15 +113,12 @@
             padding-bottom: 15px;
             font-weight: 600;
         }
-
         /* --- SVG STYLING --- */
         svg { width: 100%; height: auto; }
         rect { fill: var(--key-fill); stroke: var(--stroke); stroke-width: 0.6px; }
         text { fill: #888; font-size: 17px; text-anchor: middle; dominant-baseline: middle; }
-
         .specialKey text { font-size: 18px; fill: #aaa; }
         .col_mid_L text, .col_mid_R text { font-size: 11px; fill: #666; }
-
         /* Couleurs permanentes Calques */
         #nav-key rect { fill: var(--accent-nav); stroke: none; }
         #nav-key text { fill: #000 !important; font-weight: 500; }
@@ -142,11 +126,9 @@
         #sym-key text { fill: #fff !important; font-weight: 500; }
         #acc-key rect { fill: var(--accent-acc); stroke: none; }
         #acc-key text { fill: #fff !important; }
-
         /* Positions */
         #left  { transform: translate(4px, 15px); }
         #right { transform: translate(600px, 15px); }
-
         .col_L { transform: translate(0px, 22.5px); }
         .col_1 { transform: translate(60px, 22.5px); }
         .col_2 { transform: translate(120px, 7.5px); }
@@ -161,7 +143,6 @@
         .col_9 { transform: translate(180px, 7.5px); }
         .col_0 { transform: translate(240px, 22.5px); }
         .col_R { transform: translate(300px, 22.5px); }
-
         .thb_3 { transform: translate(210px, 190px); }
         .thb_4 { transform: translate(280px, 191px); }
         .thb_5 { transform: translate(360px, 182px); }
@@ -172,40 +153,32 @@
         .thb_6 { transform: translate(-57px, 201px); }
         .thb_7 g { transform: rotate(-12deg); }
         .thb_6 g { transform: rotate(-24deg); }
-
         /* --- PREVIEW LAYERS (2x2) --- */
         .target text { font-size: 20px; }
         .sym { fill: var(--accent-sym); font-size: 15px; }
         .acc { fill: var(--accent-acc); font-size: 18px; transform: translateY(-22px); }
         .nav { display: none; fill: var(--accent-nav); font-size: 22px; }
-
         /* 1. Normal - Lettre seule centrée */
         .layer-normal .sym, .layer-normal .acc, .layer-normal .nav { display: none; }
         .layer-normal .level2 { transform: translate(13px, 5px); font-size: 24px; fill: #ddd; }
         .layer-normal .level1 ~ .level2 { transform: translate(13px, -4px); font-size: 18px; }
         .layer-normal .level1 { transform: translate(13px, -10px); font-size: 18px; fill: #888; }
-
         /* 2. Accents centrés */
         .layer-acc .level1, .layer-acc .level2, .layer-acc .sym, .layer-acc .nav { display: none; }
         .layer-acc .acc { transform: translate(-12px, -13px); font-size: 24px; }
-
         /* 3. Symbols centrés */
         .layer-sym .level1, .layer-sym .level2, .layer-sym .acc, .layer-sym .nav { display: none; }
         .layer-sym .sym { transform: translate(-12px, -13px); font-size: 24px; }
-
         /* 4. Navigation */
         .layer-nav .sym, .layer-nav .acc, .layer-nav .level1, .layer-nav .level2 { display: none; }
         .layer-nav .nav { display: block; }
-
         /* SPECIFIQUE TOUCHE 0 / ETOILE DANS NAV */
         .layer-nav #acc-key rect { fill: var(--key-fill) !important; stroke: var(--stroke) !important; }
         .layer-nav #acc-key .acc-star { display: block !important; fill: var(--accent-acc) !important; font-size: 14px; transform: translateY(-15px); }
         .layer-nav #acc-key .nav { fill: var(--accent-nav) !important; transform: translateY(5px); font-weight: bold; }
-
     </style>
 </head>
 <body>
-
     <div class="intro-card">
         <div class="header-top">
             <div>
@@ -213,8 +186,7 @@
                 <p>Layout optimised for 50/50 French & English typing + Spanish compatible<br><i>Corne keyboard, Rosella Layout by GalileoBlue, globally inspired by ErgoL by NuclearSquid</i></p>
             </div>
             <div class="badge">40-46 key Corne Layout</div>
-        </div>
-
+		</div>
         <div class="dashboard-main">
             <div class="stats-box">
                 <table>
@@ -241,8 +213,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+	</div>
     <!-- MAIN VIEW -->
     <div class="kb-section layer-all full">
         <div class="layer-title">All layers (except Nav)</div>
@@ -335,7 +306,6 @@
             </svg>
         </div>
     </div>
-
     <!-- 2x2 GRID -->
     <div class="layers-grid">
         <div class="kb-section layer-normal">
@@ -355,7 +325,6 @@
             <div class="target"></div>
         </div>
     </div>
-
     <script>
         const masterHTML = document.getElementById('master-svg').innerHTML;
         document.querySelectorAll('.target').forEach(el => {
