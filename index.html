@@ -1,3 +1,5 @@
+--- START OF FILE Paste August 29, 2026 - 12:31AM ---
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -93,7 +95,31 @@
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #222;
+            position: relative; /* Nécessaire pour le drapeau */
+            overflow: hidden;   /* Pour couper le fondu du drapeau */
         }
+
+        /* Style du drapeau en fond droit (Effet Olympique) */
+        .stat-flag {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(to left, black 10%, transparent 100%);
+            mask-image: linear-gradient(to left, black 10%, transparent 100%);
+        }
+
+        .stat-content {
+            position: relative;
+            z-index: 1; /* Pour passer au dessus du drapeau */
+        }
+
         .stat-lang { color: var(--accent-nav); font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; display: block; }
         .stat-meta { color: #666; font-size: 0.7rem; font-family: monospace; display: block; margin-bottom: 10px; }
         .stat-values { display: flex; gap: 15px; font-size: 0.85rem; }
@@ -243,27 +269,36 @@
         <!-- STATS SUR UNE LIGNE -->
         <div class="stats-horizontal">
             <div class="stat-item">
-                <span class="stat-lang">Français</span>
-                <span class="stat-meta">lexique4_5K</span>
-                <div class="stat-values">
-                    <span><span class="stat-label">SBS:</span><span class="stat-numb">1.10%</span></span>
-                    <span><span class="stat-label">SFS:</span><span class="stat-numb">4.24%</span></span>
+                <div class="stat-flag" style="background-image: url('https://flagcdn.com/w320/fr.png');"></div>
+                <div class="stat-content">
+                    <span class="stat-lang">Français</span>
+                    <span class="stat-meta">lexique4_5K</span>
+                    <div class="stat-values">
+                        <span><span class="stat-label">SBS:</span><span class="stat-numb">1.10%</span></span>
+                        <span><span class="stat-label">SFS:</span><span class="stat-numb">4.24%</span></span>
+                    </div>
                 </div>
             </div>
             <div class="stat-item">
-                <span class="stat-lang">English</span>
-                <span class="stat-meta">en_5K list</span>
-                <div class="stat-values">
-                    <span><span class="stat-label">SBS:</span><span class="stat-numb">1.13%</span></span>
-                    <span><span class="stat-label">SFS:</span><span class="stat-numb">4.43%</span></span>
+                <div class="stat-flag" style="background-image: url('https://flagcdn.com/w320/gb.png');"></div>
+                <div class="stat-content">
+                    <span class="stat-lang">English</span>
+                    <span class="stat-meta">en_5K list</span>
+                    <div class="stat-values">
+                        <span><span class="stat-label">SBS:</span><span class="stat-numb">1.13%</span></span>
+                        <span><span class="stat-label">SFS:</span><span class="stat-numb">4.43%</span></span>
+                    </div>
                 </div>
             </div>
             <div class="stat-item">
-                <span class="stat-lang">Español</span>
-                <span class="stat-meta">es_5K list</span>
-                <div class="stat-values">
-                    <span><span class="stat-label">SBS:</span><span class="stat-numb">1.05%</span></span>
-                    <span><span class="stat-label">SFS:</span><span class="stat-numb">6.41%</span></span>
+                <div class="stat-flag" style="background-image: url('https://flagcdn.com/w320/es.png');"></div>
+                <div class="stat-content">
+                    <span class="stat-lang">Español</span>
+                    <span class="stat-meta">es_5K list</span>
+                    <div class="stat-values">
+                        <span><span class="stat-label">SBS:</span><span class="stat-numb">1.05%</span></span>
+                        <span><span class="stat-label">SFS:</span><span class="stat-numb">6.41%</span></span>
+                    </div>
                 </div>
             </div>
         </div>
