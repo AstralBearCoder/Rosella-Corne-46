@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>40 to 46-key with Rosella Layout</title>
+    <title>Corne Keyboard - Rosellæ Layout</title>
     <style>
         :root {
             --bg-page: #0a0a0a;
@@ -16,7 +16,6 @@
             --key-fill: #222;
             --stroke: #333;
 
-            /* Couleurs doigts Ortho (Léger) */
             --f-pinky: rgba(255, 100, 100, 0.12);
             --f-ring: rgba(255, 200, 100, 0.12);
             --f-middle: rgba(100, 255, 100, 0.12);
@@ -49,13 +48,10 @@
             box-sizing: border-box;
         }
 
-        @media (min-width: 768px) { .intro-card { padding: 35px; margin-bottom: 50px; } }
-
         .header-top { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
         @media (min-width: 768px) { .header-top { flex-direction: row; justify-content: space-between; align-items: flex-start; } }
 
         .header-top h1 { margin: 0; font-size: 1.8rem; font-weight: 600; letter-spacing: -1px; }
-        @media (min-width: 768px) { .header-top h1 { font-size: 2.2rem; } }
         .header-top p { margin: 5px 0 0 0; color: #999; font-size: 1.1rem; }
 
         .badge {
@@ -69,7 +65,6 @@
             align-self: flex-start;
         }
 
-        /* --- MODIFICATION DASHBOARD --- */
         .dashboard-main {
             display: flex;
             flex-direction: column;
@@ -78,7 +73,6 @@
             padding-top: 30px;
         }
 
-        /* Stats sur une ligne */
         .stats-horizontal {
             display: flex;
             justify-content: space-between;
@@ -93,68 +87,41 @@
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #222;
-            position: relative; /* Nécessaire pour le drapeau */
-            overflow: hidden;   /* Pour couper le fondu du drapeau */
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Style du drapeau en fond droit (Effet Olympique) */
         .stat-flag {
             position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 120px;
-            z-index: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.25;
-            pointer-events: none;
+            right: 0; top: 0; bottom: 0;
+            width: 120px; z-index: 0;
+            background-size: cover; background-position: center;
+            opacity: 0.25; pointer-events: none;
             -webkit-mask-image: linear-gradient(to left, black 10%, transparent 100%);
             mask-image: linear-gradient(to left, black 10%, transparent 100%);
         }
 
-        .stat-content {
-            position: relative;
-            z-index: 1; /* Pour passer au dessus du drapeau */
-        }
-
+        .stat-content { position: relative; z-index: 1; }
         .stat-lang { color: var(--accent-nav); font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; display: block; }
         .stat-meta { color: #666; font-size: 0.7rem; font-family: monospace; display: block; margin-bottom: 10px; }
         .stat-values { display: flex; gap: 15px; font-size: 0.85rem; }
         .stat-label { color: #aaa; text-transform: uppercase; font-size: 0.7rem; margin-right: 5px; }
         .stat-numb { color: #eee; font-family: 'JetBrains Mono', monospace; }
 
-        /* Ortho box */
         .ortho-box { background: var(--bg-inset); padding: 25px; border-radius: 12px; overflow-x: auto; width: 100%; box-sizing: border-box; max-width: 700px; margin: 0 auto;}
-
-        .layout-menu {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: #555;
-            text-align: center;
-        }
-        .layout-btn { cursor: pointer; transition: 0.2s; padding-bottom: 2px; border-bottom: 2px solid transparent; }
-        .layout-btn:hover { color: #aaa; }
-        .layout-btn.active { color: var(--accent-nav); border-bottom: 2px solid var(--accent-nav); }
-
         .ortho-title { font-size: 0.8rem; color: #aaa; text-transform: uppercase; margin-bottom: 20px; display: block; text-align: center; font-weight: 600; }
 
         .ortho-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr) 15px repeat(5, 1fr) 1fr;
+            grid-template-columns: repeat(5, 1fr) 15px repeat(5, 1fr);
             gap: 6px;
             min-width: 320px;
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto;
         }
 
         .ortho-key {
-            aspect-ratio: 1;
+            aspect-ratio: 1.2;
             background: #252525;
             border: 1px solid #333;
             display: flex; align-items: center; justify-content: center;
@@ -163,13 +130,6 @@
             box-sizing: border-box;
         }
         .ortho-gap { grid-column: 6; }
-
-        .key-diff {
-            border: 2px solid var(--accent-nav) !important;
-            color: #fff !important;
-            font-weight: 600;
-        }
-        .hidden-key { opacity: 0; pointer-events: none; }
 
         .f-p { background-color: var(--f-pinky); border-color: rgba(255,100,100,0.3); }
         .f-r { background-color: var(--f-ring); border-color: rgba(255,200,100,0.3); }
@@ -209,7 +169,6 @@
             font-weight: 600;
         }
 
-        /* SVG STYLING (COPIÉ) */
         svg { width: 100%; height: auto; display: block; }
         rect { fill: var(--key-fill); stroke: var(--stroke); stroke-width: 0.6px; }
         text { fill: #888; font-size: 17px; text-anchor: middle; dominant-baseline: middle; }
@@ -236,7 +195,6 @@
         .thb_4 g { transform: rotate(12deg); } .thb_5 g { transform: rotate(24deg); }
         .thb_7 g { transform: rotate(-12deg); } .thb_6 g { transform: rotate(-24deg); }
 
-        /* PREVIEW LAYERS (COPIÉ) */
         .target text { font-size: 20px; }
         .sym { fill: var(--accent-sym); font-size: 15px; }
         .acc { fill: var(--accent-acc); font-size: 18px; }
@@ -258,13 +216,12 @@
 <div class="intro-card">
     <div class="header-top">
         <div>
-            <h1>Rosella for Corne</h1>
-            <p>Layout optimised for 50/50 French & English typing + Spanish compatible<br><i>Corne keyboard, Rosella Layout by GalileoBlue, globally inspired by ErgoL</i></p>
+            <h1>Rosellæ for Corne</h1>
+            <p>Optimisé pour 50/50 Français & Anglais + Espagnol<br><i>Corne keyboard, Rosellæ Layout by GalileoBlue</i></p>
         </div>
         <div class="badge">40-46 key Corne Layout</div>
     </div>
     <div class="dashboard-main">
-        <!-- STATS SUR UNE LIGNE -->
         <div class="stats-horizontal">
             <div class="stat-item">
                 <div class="stat-flag" style="background-image: url('https://flagcdn.com/w320/fr.png');"></div>
@@ -272,8 +229,8 @@
                     <span class="stat-lang">Français</span>
                     <span class="stat-meta">lexique4_5K</span>
                     <div class="stat-values">
-                        <span><span class="stat-label">SBS:</span><span class="stat-numb">1.10%</span></span>
-                        <span><span class="stat-label">SFS:</span><span class="stat-numb">4.24%</span></span>
+                        <span><span class="stat-label">SBS:</span><span class="stat-numb">0.81%%</span></span>
+                        <span><span class="stat-label">SFS:</span><span class="stat-numb">4.84%</span></span>
                     </div>
                 </div>
             </div>
@@ -283,8 +240,8 @@
                     <span class="stat-lang">English</span>
                     <span class="stat-meta">en_5K list</span>
                     <div class="stat-values">
-                        <span><span class="stat-label">SBS:</span><span class="stat-numb">1.13%</span></span>
-                        <span><span class="stat-label">SFS:</span><span class="stat-numb">4.43%</span></span>
+                        <span><span class="stat-label">SBS:</span><span class="stat-numb">1.00%</span></span>
+                        <span><span class="stat-label">SFS:</span><span class="stat-numb">5.34%</span></span>
                     </div>
                 </div>
             </div>
@@ -294,28 +251,22 @@
                     <span class="stat-lang">Español</span>
                     <span class="stat-meta">es_5K list</span>
                     <div class="stat-values">
-                        <span><span class="stat-label">SBS:</span><span class="stat-numb">1.05%</span></span>
-                        <span><span class="stat-label">SFS:</span><span class="stat-numb">6.41%</span></span>
+                        <span><span class="stat-label">SBS:</span><span class="stat-numb">1.03%</span></span>
+                        <span><span class="stat-label">SFS:</span><span class="stat-numb">5.80%</span></span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ORTHO BOX EN DESSOUS -->
         <div class="ortho-box">
-            <div class="layout-menu">
-                <span class="layout-btn" onclick="switchLayout('orig')" id="btn-orig">Original Layout by GalileoBlue</span>
-                <span style="color: #444; font-weight: normal;">|</span>
-                <span class="layout-btn active" onclick="switchLayout('mod')" id="btn-mod">MOD layout</span>
-            </div>
-            <span class="ortho-title">Rosella comparison</span>
+            <span class="ortho-title">Visualisation de la grille Rosellæ</span>
             <div class="ortho-grid" id="ortho-grid"></div>
         </div>
     </div>
 </div>
 
 <div class="kb-section layer-all full">
-    <div class="layer-title">All layers (Reference View)</div>
+    <div class="layer-title">Toutes les couches (Référence)</div>
     <div id="master-svg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 300">
             <g id="left">
@@ -327,7 +278,7 @@
                 <g class="col_1">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">B</text><text x="38" y="40" class="sym">~</text><text x="26" y="26" class="nav">1</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">N</text><text x="38" y="40" class="sym">+</text><text x="38" y="16" class="acc">ñ</text><text x="26" y="26" class="nav">←</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Q</text><text x="38" y="40" class="sym">$</text><text x="26" y="26" style="font-size: 15px;" class="nav">undo</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:16px;">QU</text><text x="38" y="40" class="sym">$</text><text x="26" y="26" style="font-size: 15px;" class="nav">undo</text></g>
                 </g>
                 <g class="col_2">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">L</text><text x="38" y="40" class="sym">*</text><text x="26" y="26" class="nav">2</text></g>
@@ -346,16 +297,17 @@
                 </g>
                 <g class="col_5">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">V</text><text x="26" y="26" class="nav">5</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">F</text><text x="38" y="40" class="sym">`</text><text x="26" y="26" class="nav" style="font-size: 15px;">all</text></g>
+                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">F</text><text x="38" y="40" class="sym">q</text><text x="26" y="26" class="nav" style="font-size: 15px;">all</text></g>
                     <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">W</text><text x="38" y="16" class="acc">æ</text><text x="26" y="26" class="nav" style="font-size: 15px;">paste</text></g>
                 </g>
                 <g class="col_mid_L specialKey">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="26"/><text x="26" y="26">Vol</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="6"/><text x="26" y="26">Scr</text></g>
                 </g>
-                <g class="thb_3 specialKey"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:14px;">Ctrl</text></g></g>
+                <!-- INVERSION Ctrl et Accents -->
+                <g class="thb_3" id="acc-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" class="acc-star">★</text></g></g>
                 <g class="thb_4" id="shift-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:14px;">Shift</text></g></g>
-                <g class="thb_5" id="acc-key"><g><rect width="52" height="82" rx="5"/><text x="26" y="41" class="acc-star">★</text></g></g>
+                <g class="thb_5" id="ctrl-key"><g><rect width="52" height="82" rx="5"/><text x="26" y="41" style="font-size:14px; fill: #eee;">Ctrl</text></g></g>
             </g>
             <g id="right">
                 <g class="col_mid_R specialKey">
@@ -363,9 +315,9 @@
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="6"/><text x="26" y="26">Alt</text></g>
                 </g>
                 <g class="col_6">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">X</text><text x="26" y="26" class="nav">6</text></g>
+                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Z</text><text x="26" y="26" class="nav">6</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Y</text><text x="38" y="16" class="acc">œ</text><text x="26" y="26" class="nav">⇞</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">K</text><text x="26" y="26" class="nav">⇟</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">K</text><text x="26" y="26" class="nav">⇟</text><text x="38" y="40" class="sym">`</text></g>
                 </g>
                 <g class="col_7">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">"</text><text x="14" y="40" class="level1">'</text><text x="38" y="40" class="sym">&lt;</text><text x="38" y="16" class="acc">î</text><text x="26" y="26" class="nav">7</text></g>
@@ -374,18 +326,18 @@
                 </g>
                 <g class="col_8">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">O</text><text x="38" y="40" class="sym">&gt;</text><text x="38" y="16" class="acc">ê</text><text x="26" y="26" class="nav">8</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">A</text><text x="38" y="40" class="sym">@</text><text x="38" y="16" class="acc">à</text><text x="26" y="26" class="nav">f2</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">:</text><text x="14" y="40" class="level1">.</text><text x="38" y="40" class="sym">%</text><text x="38" y="16" class="acc">â</text><text x="26" y="26" class="nav">⏯</text></g>
+                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">E</text><text x="38" y="40" class="sym">@</text><text x="38" y="16" class="acc">à</text><text x="26" y="26" class="nav">f2</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">?</text><text x="14" y="40" class="level1">.</text><text x="38" y="40" class="sym">%</text><text x="38" y="16" class="acc">â</text><text x="26" y="26" class="nav">⏯</text></g>
                 </g>
                 <g class="col_9">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">U</text><text x="38" y="40" class="sym">\</text><text x="38" y="16" class="acc">ù</text><text x="26" y="26" class="nav">9</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">I</text><text x="38" y="40" class="sym">/</text><text x="38" y="16" class="acc">è</text><text x="26" y="26" class="nav">f4</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">;</text><text x="14" y="40" class="level1">,</text><text x="38" y="40" class="sym">|</text><text x="38" y="16" class="acc">ô</text><text x="26" y="26" class="nav">⏭</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">!</text><text x="14" y="40" class="level1">,</text><text x="38" y="40" class="sym">|</text><text x="38" y="16" class="acc">ô</text><text x="26" y="26" class="nav">⏭</text></g>
                 </g>
                 <g class="col_0">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Z</text><text x="38" y="40" class="sym">&amp;</text><text x="38" y="16" class="acc">û</text><text x="26" y="26" class="nav">0</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">E</text><text x="38" y="40" class="sym">-</text><text x="38" y="16" class="acc">é</text><text x="26" y="26" class="nav">↘</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">!</text><text x="14" y="40" class="level1">?</text><text x="38" y="40" class="sym">°</text><text x="38" y="16" class="acc">ë</text></g>
+                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">X</text><text x="38" y="40" class="sym">&amp;</text><text x="38" y="16" class="acc">û</text><text x="26" y="26" class="nav">0</text></g>
+                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">A</text><text x="38" y="40" class="sym">-</text><text x="38" y="16" class="acc">é</text><text x="26" y="26" class="nav">↘</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">-</text><text x="14" y="40" class="level1">:</text><text x="38" y="40" class="sym">°</text><text x="38" y="16" class="acc">ë</text></g>
                 </g>
                 <g class="col_R specialKey">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⌫</text><text x="26" y="26" class="nav">⌦</text></g>
@@ -408,32 +360,31 @@
 </div>
 
 <script>
-    const orthoData = {
-        orig: ["b","l","d","c","v","gap","x","'","o","u","-","empty","n","r","t","s","f","gap","y","h","a","i","e","z","q","j","m","g","w","gap","k","p",".",",","/"],
-        mod: ["b","l","d","c","v","gap","x","'","o","u","z","empty","n","r","t","s","f","gap","y","h","a","i","e","empty","q","j","m","g","w","gap","k","p",",",".","?"]
-    };
-    const fingers = ["f-p","f-r","f-m","f-i","f-i","gap","f-i","f-i","f-m","f-r","f-p","f-p"];
+    // Mise à jour de la grille Ortho avec le layout Rosellæ demandé
+    const orthoData = [
+        "b","l","d","c","v","gap","z","'","o","u","x",
+        "n","r","t","s","f","gap","y","h","e","i","a",
+        "qu","j","m","g","w","gap","k","p",".",",",":"
+    ];
 
-    function switchLayout(type) {
+    const fingers = ["f-p","f-r","f-m","f-i","f-i","gap","f-i","f-i","f-m","f-r","f-p"];
+
+    function renderOrtho() {
         const grid = document.getElementById('ortho-grid');
         grid.innerHTML = '';
-        document.getElementById('btn-orig').classList.toggle('active', type === 'orig');
-        document.getElementById('btn-mod').classList.toggle('active', type === 'mod');
-        orthoData[type].forEach((key, i) => {
+        orthoData.forEach((key, i) => {
             if (key === "gap") {
                 const div = document.createElement('div'); div.className = 'ortho-gap'; grid.appendChild(div);
-            } else if (key === "empty") {
-                const div = document.createElement('div'); div.className = 'ortho-key hidden-key'; grid.appendChild(div);
             } else {
                 const div = document.createElement('div');
-                div.className = `ortho-key ${fingers[i % 12]}`;
+                div.className = `ortho-key ${fingers[i % 11]}`;
                 div.innerText = key;
-                if (key !== orthoData[type === 'mod' ? 'orig' : 'mod'][i]) div.classList.add('key-diff');
                 grid.appendChild(div);
             }
         });
     }
-    switchLayout('mod');
+
+    renderOrtho();
     const masterHTML = document.getElementById('master-svg').innerHTML;
     document.querySelectorAll('.target').forEach(el => {
         el.innerHTML = `<svg viewBox="0 0 1080 300">${masterHTML}</svg>`;
