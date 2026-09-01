@@ -6,15 +6,20 @@
     <title>Corne Keyboard - Rosellæ Layout</title>
     <style>
         :root {
+            /* Couleurs Dark (Défaut) */
             --bg-page: #0a0a0a;
             --bg-card: #121212;
             --bg-inset: #1a1a1a;
             --accent-nav: #e83;
             --accent-sym: #55a;
-            --accent-acc: #008523;
+            --accent-acc: #00bb23;
             --text-main: #eee;
+            --text-muted: #999;
+            --text-dim: #666;
             --key-fill: #222;
             --stroke: #333;
+            --svg-text: #888;
+            --special-key-text: #aaa;
 
             --f-pinky: rgba(255, 100, 100, 0.12);
             --f-ring: rgba(255, 200, 100, 0.12);
@@ -22,9 +27,28 @@
             --f-index: rgba(100, 150, 255, 0.18);
         }
 
+        /* Couleurs Light Mode */
+        [data-theme="light"] {
+            --bg-page: #f0f0f5;
+            --bg-card: #ffffff;
+            --bg-inset: #e2e2e8;
+            --text-main: #1a1a1a;
+            --text-muted: #555;
+            --text-dim: #888;
+            --key-fill: #e0e0e6;
+            --stroke: #ccc;
+            --svg-text: #444;
+            --special-key-text: #222;
+
+            --f-pinky: rgba(255, 100, 100, 0.08);
+            --f-ring: rgba(255, 200, 100, 0.08);
+            --f-middle: rgba(100, 255, 100, 0.08);
+            --f-index: rgba(100, 150, 255, 0.12);
+        }
+
         body {
             background-color: var(--bg-page);
-            color: #eee;
+            color: var(--text-main);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 20px;
@@ -32,9 +56,45 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         @media (min-width: 768px) { body { padding: 40px; } }
+
+        /* SÉLECTEUR DE THÈME */
+        .theme-switcher {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: var(--bg-card);
+            border: 1px solid var(--stroke);
+            padding: 5px;
+            border-radius: 50px;
+            display: flex;
+            gap: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .theme-btn {
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .theme-btn.active {
+            background: var(--accent-nav);
+            color: #000;
+        }
+
+        /* FIN STYLE BOUTON */
 
         .intro-card {
             background: var(--bg-card);
@@ -43,8 +103,8 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto 30px auto;
-            border: 1px solid #222;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            border: 1px solid var(--stroke);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
             box-sizing: border-box;
         }
 
@@ -52,7 +112,7 @@
         @media (min-width: 768px) { .header-top { flex-direction: row; justify-content: space-between; align-items: flex-start; } }
 
         .header-top h1 { margin: 0; font-size: 1.8rem; font-weight: 600; letter-spacing: -1px; }
-        .header-top p { margin: 5px 0 0 0; color: #999; font-size: 1.1rem; }
+        .header-top p { margin: 5px 0 0 0; color: var(--text-muted); font-size: 1.1rem; }
 
         .badge {
             background: var(--accent-nav);
@@ -69,7 +129,7 @@
             display: flex;
             flex-direction: column;
             gap: 30px;
-            border-top: 1px solid #222;
+            border-top: 1px solid var(--stroke);
             padding-top: 30px;
         }
 
@@ -83,10 +143,10 @@
         .stat-item {
             flex: 1;
             min-width: 250px;
-            background: rgba(255,255,255,0.03);
+            background: rgba(128,128,128,0.05);
             padding: 15px;
             border-radius: 8px;
-            border: 1px solid #222;
+            border: 1px solid var(--stroke);
             position: relative;
             overflow: hidden;
         }
@@ -103,13 +163,13 @@
 
         .stat-content { position: relative; z-index: 1; }
         .stat-lang { color: var(--accent-nav); font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; display: block; }
-        .stat-meta { color: #666; font-size: 0.7rem; font-family: monospace; display: block; margin-bottom: 10px; }
+        .stat-meta { color: var(--text-dim); font-size: 0.7rem; font-family: monospace; display: block; margin-bottom: 10px; }
         .stat-values { display: flex; gap: 15px; font-size: 0.85rem; }
-        .stat-label { color: #aaa; text-transform: uppercase; font-size: 0.7rem; margin-right: 5px; }
-        .stat-numb { color: #eee; font-family: 'JetBrains Mono', monospace; }
+        .stat-label { color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; margin-right: 5px; }
+        .stat-numb { color: var(--text-main); font-family: 'JetBrains Mono', monospace; }
 
         .ortho-box { background: var(--bg-inset); padding: 25px; border-radius: 12px; overflow-x: auto; width: 100%; box-sizing: border-box; max-width: 700px; margin: 0 auto;}
-        .ortho-title { font-size: 0.8rem; color: #aaa; text-transform: uppercase; margin-bottom: 20px; display: block; text-align: center; font-weight: 600; }
+        .ortho-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 20px; display: block; text-align: center; font-weight: 600; }
 
         .ortho-grid {
             display: grid;
@@ -122,10 +182,10 @@
 
         .ortho-key {
             aspect-ratio: 1.2;
-            background: #252525;
-            border: 1px solid #333;
+            background: var(--key-fill);
+            border: 1px solid var(--stroke);
             display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; color: #ccc; border-radius: 4px;
+            font-size: 0.9rem; color: var(--text-main); border-radius: 4px;
             text-transform: uppercase;
             box-sizing: border-box;
         }
@@ -140,7 +200,7 @@
             background: var(--bg-card);
             padding: 20px;
             border-radius: 15px;
-            border: 1px solid #1a1a1a;
+            border: 1px solid var(--stroke);
             box-sizing: border-box;
             width: 100%;
         }
@@ -164,16 +224,17 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             text-align: center;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid var(--stroke);
             padding-bottom: 15px;
             font-weight: 600;
         }
 
         svg { width: 100%; height: auto; display: block; }
-        rect { fill: var(--key-fill); stroke: var(--stroke); stroke-width: 0.6px; }
-        text { fill: #888; font-size: 17px; text-anchor: middle; dominant-baseline: middle; }
-        .specialKey text { font-size: 18px; fill: #aaa; }
-        .col_mid_L text, .col_mid_R text { font-size: 11px; fill: #666; }
+        rect { fill: var(--key-fill); stroke: var(--stroke); stroke-width: 0.6px; transition: fill 0.3s, stroke 0.3s; }
+        text { fill: var(--svg-text); font-size: 17px; text-anchor: middle; dominant-baseline: middle; transition: fill 0.3s; }
+        .specialKey text { font-size: 18px; fill: var(--special-key-text); }
+        .col_mid_L text, .col_mid_R text { font-size: 11px; fill: var(--text-dim); }
+
         #nav-key rect { fill: var(--accent-nav); stroke: none; }
         #nav-key text { fill: #000 !important; font-weight: 500; }
         #sym-key rect { fill: var(--accent-sym); stroke: none; }
@@ -200,10 +261,10 @@
         .acc { fill: var(--accent-acc); font-size: 18px; }
         .nav { display: none; fill: var(--accent-nav); font-size: 22px; }
         .layer-normal .sym, .layer-normal .acc, .layer-normal .nav { display: none; }
-        .layer-normal .level1 { x: 26px !important; y: 26px !important; font-size: 24px; fill: #ddd; }
+        .layer-normal .level1 { x: 26px !important; y: 26px !important; font-size: 24px; fill: var(--text-main); }
         .layer-normal .level2 { display: none; }
         .layer-normal g:has(.level2) .level1 { y: 38px !important; font-size: 20px; }
-        .layer-normal g:has(.level2) .level2 { display: block; x: 26px !important; y: 18px !important; font-size: 20px; fill: #888; }
+        .layer-normal g:has(.level2) .level2 { display: block; x: 26px !important; y: 18px !important; font-size: 20px; fill: var(--text-muted); }
         .layer-acc .level1, .layer-acc .level2, .layer-acc .sym, .layer-acc .nav { display: none; }
         .layer-acc .acc { x: 26px !important; y: 26px !important; font-size: 24px; }
         .layer-sym .level1, .layer-sym .level2, .layer-sym .acc, .layer-sym .nav { display: none; }
@@ -213,6 +274,12 @@
     </style>
 </head>
 <body>
+
+<div class="theme-switcher">
+    <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')">Dark</button>
+    <button class="theme-btn" id="btn-light" onclick="setTheme('light')">Light</button>
+</div>
+
 <div class="intro-card">
     <div class="header-top">
         <div>
@@ -229,7 +296,7 @@
                     <span class="stat-lang">Français</span>
                     <span class="stat-meta">lexique4_5K</span>
                     <div class="stat-values">
-                        <span><span class="stat-label">SBS:</span><span class="stat-numb">0.81%%</span></span>
+                        <span><span class="stat-label">SBS:</span><span class="stat-numb">0.81%</span></span>
                         <span><span class="stat-label">SFS:</span><span class="stat-numb">4.84%</span></span>
                     </div>
                 </div>
@@ -278,7 +345,7 @@
                 <g class="col_1">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">B</text><text x="38" y="40" class="sym">~</text><text x="26" y="26" class="nav">1</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">N</text><text x="38" y="40" class="sym">+</text><text x="38" y="16" class="acc">ñ</text><text x="26" y="26" class="nav">←</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:16px;">QU</text><text x="38" y="40" class="sym">$</text><text x="26" y="26" style="font-size: 15px;" class="nav">undo</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:16px;">QU</text><text x="38" y="16" class="acc">Qu</text><text x="38" y="40" class="sym">$</text><text x="26" y="26" style="font-size: 15px;" class="nav">undo</text></g>
                 </g>
                 <g class="col_2">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">L</text><text x="38" y="40" class="sym">*</text><text x="26" y="26" class="nav">2</text></g>
@@ -304,7 +371,6 @@
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="26"/><text x="26" y="26">Vol</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="6"/><text x="26" y="26">Scr</text></g>
                 </g>
-                <!-- INVERSION Ctrl et Accents -->
                 <g class="thb_3" id="acc-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" class="acc-star">★</text></g></g>
                 <g class="thb_4" id="shift-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:14px;">Shift</text></g></g>
                 <g class="thb_5" id="ctrl-key"><g><rect width="52" height="82" rx="5"/><text x="26" y="41" style="font-size:14px; fill: #eee;">Ctrl</text></g></g>
@@ -360,7 +426,30 @@
 </div>
 
 <script>
-    // Mise à jour de la grille Ortho avec le layout Rosellæ demandé
+    // Logic thème
+    function setTheme(theme) {
+        const body = document.body;
+        const btnDark = document.getElementById('btn-dark');
+        const btnLight = document.getElementById('btn-light');
+
+        if (theme === 'light') {
+            body.setAttribute('data-theme', 'light');
+            btnLight.classList.add('active');
+            btnDark.classList.remove('active');
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.removeAttribute('data-theme');
+            btnDark.classList.add('active');
+            btnLight.classList.remove('active');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    // Persistance au chargement
+    if (localStorage.getItem('theme') === 'light') {
+        setTheme('light');
+    }
+
     const orthoData = [
         "b","l","d","c","v","gap","z","'","o","u","x",
         "n","r","t","s","f","gap","y","h","e","i","a",
