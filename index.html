@@ -94,8 +94,6 @@
             color: #000;
         }
 
-        /* FIN STYLE BOUTON */
-
         .intro-card {
             background: var(--bg-card);
             border-radius: 20px;
@@ -229,6 +227,16 @@
             font-weight: 600;
         }
 
+        .layer-subtitle {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: none;
+            letter-spacing: 0;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
         svg { width: 100%; height: auto; display: block; }
         rect { fill: var(--key-fill); stroke: var(--stroke); stroke-width: 0.6px; transition: fill 0.3s, stroke 0.3s; }
         text { fill: var(--svg-text); font-size: 17px; text-anchor: middle; dominant-baseline: middle; transition: fill 0.3s; }
@@ -336,6 +344,7 @@
     <div class="layer-title">Toutes les couches (Référence)</div>
     <div id="master-svg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 300">
+            <!-- SVG contenu identique -->
             <g id="left">
                 <g class="col_L specialKey">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⎋</text></g>
@@ -345,7 +354,7 @@
                 <g class="col_1">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">B</text><text x="38" y="40" class="sym">~</text><text x="26" y="26" class="nav">1</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">N</text><text x="38" y="40" class="sym">+</text><text x="38" y="16" class="acc">ñ</text><text x="26" y="26" class="nav">←</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:16px;">QU</text><text x="38" y="16" class="acc">Qu</text><text x="38" y="40" class="sym">$</text><text x="26" y="26" style="font-size: 15px;" class="nav">undo</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:16px;">QU</text><text x="38" y="16" class="acc">q</text><text x="38" y="40" class="sym">Qu</text><text x="26" y="26" style="font-size: 15px;" class="nav">undo</text></g>
                 </g>
                 <g class="col_2">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">L</text><text x="38" y="40" class="sym">*</text><text x="26" y="26" class="nav">2</text></g>
@@ -364,7 +373,7 @@
                 </g>
                 <g class="col_5">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">V</text><text x="26" y="26" class="nav">5</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">F</text><text x="38" y="40" class="sym">q</text><text x="26" y="26" class="nav" style="font-size: 15px;">all</text></g>
+                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">F</text><text x="38" y="40" class="sym">°</text><text x="26" y="26" class="nav" style="font-size: 15px;">all</text></g>
                     <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">W</text><text x="38" y="16" class="acc">æ</text><text x="26" y="26" class="nav" style="font-size: 15px;">paste</text></g>
                 </g>
                 <g class="col_mid_L specialKey">
@@ -393,17 +402,17 @@
                 <g class="col_8">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">O</text><text x="38" y="40" class="sym">&gt;</text><text x="38" y="16" class="acc">ê</text><text x="26" y="26" class="nav">8</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">E</text><text x="38" y="40" class="sym">@</text><text x="38" y="16" class="acc">à</text><text x="26" y="26" class="nav">f2</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">?</text><text x="14" y="40" class="level1">.</text><text x="38" y="40" class="sym">%</text><text x="38" y="16" class="acc">â</text><text x="26" y="26" class="nav">⏯</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">?</text><text x="14" y="40" class="level1">,</text><text x="38" y="40" class="sym">%</text><text x="38" y="16" class="acc">â</text><text x="26" y="26" class="nav">⏯</text></g>
                 </g>
                 <g class="col_9">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">U</text><text x="38" y="40" class="sym">\</text><text x="38" y="16" class="acc">ù</text><text x="26" y="26" class="nav">9</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">I</text><text x="38" y="40" class="sym">/</text><text x="38" y="16" class="acc">è</text><text x="26" y="26" class="nav">f4</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">!</text><text x="14" y="40" class="level1">,</text><text x="38" y="40" class="sym">|</text><text x="38" y="16" class="acc">ô</text><text x="26" y="26" class="nav">⏭</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">!</text><text x="14" y="40" class="level1">.</text><text x="38" y="40" class="sym">|</text><text x="38" y="16" class="acc">ô</text><text x="26" y="26" class="nav">⏭</text></g>
                 </g>
                 <g class="col_0">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">X</text><text x="38" y="40" class="sym">&amp;</text><text x="38" y="16" class="acc">û</text><text x="26" y="26" class="nav">0</text></g>
+                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">X</text><text x="38" y="40" class="sym">$</text><text x="38" y="16" class="acc">û</text><text x="26" y="26" class="nav">0</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">A</text><text x="38" y="40" class="sym">-</text><text x="38" y="16" class="acc">é</text><text x="26" y="26" class="nav">↘</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">-</text><text x="14" y="40" class="level1">:</text><text x="38" y="40" class="sym">°</text><text x="38" y="16" class="acc">ë</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">;</text><text x="14" y="40" class="level1">:</text><text x="38" y="40" class="sym">&amp;</text><text x="38" y="16" class="acc">ë</text></g>
                 </g>
                 <g class="col_R specialKey">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⌫</text><text x="26" y="26" class="nav">⌦</text></g>
@@ -419,10 +428,31 @@
 </div>
 
 <div class="layers-grid">
-    <div class="kb-section layer-normal"><div class="layer-title">1. Alpha Layer</div><div class="target"></div></div>
-    <div class="kb-section layer-acc"><div class="layer-title">2. Accents Layer (★)</div><div class="target"></div></div>
-    <div class="kb-section layer-sym"><div class="layer-title">3. Symbols Layer (AltGr)</div><div class="target"></div></div>
-    <div class="kb-section layer-nav"><div class="layer-title">4. Navigation Layer (Nav)</div><div class="target"></div></div>
+    <div class="kb-section layer-normal">
+        <div class="layer-title">1. Alpha Layer</div>
+        <div class="target"></div>
+    </div>
+    <div class="kb-section layer-acc">
+        <div class="layer-title">
+            2. Accents Layer (★)
+            <span class="layer-subtitle">One Shot Layer</span>
+        </div>
+        <div class="target"></div>
+    </div>
+    <div class="kb-section layer-sym">
+        <div class="layer-title">
+            3. Symbols Layer (AltGr)
+            <span class="layer-subtitle">One Shot Layer</span>
+        </div>
+        <div class="target"></div>
+    </div>
+    <div class="kb-section layer-nav">
+        <div class="layer-title">
+            4. Navigation Layer (Nav)
+            <span class="layer-subtitle">Momentary Layer</span>
+        </div>
+        <div class="target"></div>
+    </div>
 </div>
 
 <script>
@@ -445,15 +475,12 @@
         }
     }
 
-    // Persistance au chargement
-    if (localStorage.getItem('theme') === 'light') {
-        setTheme('light');
-    }
+    if (localStorage.getItem('theme') === 'light') setTheme('light');
 
     const orthoData = [
         "b","l","d","c","v","gap","z","'","o","u","x",
         "n","r","t","s","f","gap","y","h","e","i","a",
-        "qu","j","m","g","w","gap","k","p",".",",",":"
+        "qu","j","m","g","w","gap","k","p",",",".",":"
     ];
 
     const fingers = ["f-p","f-r","f-m","f-i","f-i","gap","f-i","f-i","f-m","f-r","f-p"];
