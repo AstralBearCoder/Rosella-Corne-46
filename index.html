@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -52,7 +51,7 @@
             color: var(--text-main);
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 15px; /* Réduit pour mobile */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -81,16 +80,19 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        /* SÉLECTEUR DE COUCHES (DANS LE CADRE) */
+        /* SÉLECTEUR DE COUCHES (CORRIGÉ POUR MOBILE) */
         .layout-switcher {
             margin: 25px auto 0 auto;
             background: var(--bg-inset);
             border: 1px solid var(--stroke);
             padding: 5px;
-            border-radius: 50px;
+            border-radius: 25px; /* Plus flexible que 50px pour le wrap */
             display: flex;
             gap: 5px;
             width: fit-content;
+            max-width: 100%;
+            flex-wrap: wrap; /* Permet aux boutons de passer à la ligne sur petit écran */
+            justify-content: center;
         }
 
         .ctrl-btn {
@@ -104,6 +106,7 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             transition: 0.2s;
+            white-space: nowrap; /* Empêche le texte du bouton de se couper */
         }
 
         .ctrl-btn.active {
@@ -114,7 +117,7 @@
         .intro-card {
             background: var(--bg-card);
             border-radius: 20px;
-            padding: 25px;
+            padding: 20px;
             width: 100%;
             max-width: 1200px;
             margin: 0 auto 30px auto;
@@ -213,7 +216,7 @@
 
         .kb-section {
             background: var(--bg-card);
-            padding: 20px;
+            padding: 15px;
             border-radius: 15px;
             border: 1px solid var(--stroke);
             box-sizing: border-box;
@@ -254,7 +257,22 @@
             font-weight: 400;
         }
 
-        svg { width: 100%; height: auto; display: block; }
+        /* CONTENEUR SVG POUR LE RESPONSIVE */
+        .kb-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 10px;
+        }
+
+        svg {
+            min-width: 700px; /* Force une largeur minimale pour la lisibilité sur mobile */
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
         rect { fill: var(--key-fill); stroke: var(--stroke); stroke-width: 0.6px; transition: fill 0.3s, stroke 0.3s; }
         text { fill: var(--svg-text); font-size: 17px; text-anchor: middle; dominant-baseline: middle; transition: fill 0.3s; }
         .specialKey text { font-size: 18px; fill: var(--special-key-text); }
@@ -380,7 +398,7 @@
 
 <div class="kb-section layer-all full" id="full-section" data-view="alpha-acc-sym">
     <div class="layer-title">Toutes les couches (Référence)</div>
-    <div id="master-svg">
+    <div class="kb-wrapper" id="master-svg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 300">
             <g id="left">
                 <g class="col_L specialKey">
@@ -390,28 +408,28 @@
                 </g>
                 <g class="col_1">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">B</text><text x="38" y="40" class="sym">~</text><text x="38" y="16" class="acc">ö</text><text x="38" y="40" class="nav">⏮</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">N</text><text x="38" y="40" class="sym">+</text><text x="38" y="16" class="acc" style="font-size:10px;">all</text><text x="38" y="40" class="nav">←</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:16px;">QU</text><text x="38" y="40" class="sym">Qu</text><text x="38" y="16" class="acc">Q</text><text x="38" y="40" class="nav">1</text></g>
+                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">N</text><text x="38" y="40" class="sym">+</text><text x="38" y="16" class="acc">á</text><text x="38" y="40" class="nav">←</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:16px;">QU</text><text x="38" y="40" class="sym">Qu</text><text x="38" y="16" class="acc">q</text><text x="38" y="40" class="nav">1</text></g>
                 </g>
                 <g class="col_2">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">L</text><text x="38" y="40" class="sym">*</text><text x="38" y="16" class="acc">á</text><text x="38" y="40" class="nav">⏯</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">R</text><text x="38" y="40" class="sym">=</text><text x="38" y="16" class="acc">í</text><text x="38" y="40" class="nav">↓</text></g>
+                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">L</text><text x="38" y="40" class="sym">*</text><text x="38" y="16" class="acc">ä</text><text x="38" y="40" class="nav">⏯</text></g>
+                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">R</text><text x="38" y="40" class="sym">=</text><text x="38" y="16" class="acc">ú</text><text x="38" y="40" class="nav">↓</text></g>
                     <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">J</text><text x="38" y="40" class="sym">€</text><text x="38" y="16" class="acc" style="font-size:10px;">undo</text><text x="38" y="40" class="nav">2</text></g>
                 </g>
                 <g class="col_3">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">D</text><text x="38" y="40" class="sym">[</text><text x="38" y="16" class="acc">ó</text><text x="38" y="40" class="nav">⏭</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">T</text><text x="38" y="40" class="sym">(</text><text x="38" y="16" class="acc">ú</text><text x="38" y="40" class="nav">↑</text></g>
+                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">D</text><text x="38" y="40" class="sym">[</text><text x="38" y="16" class="acc">ü</text><text x="38" y="40" class="nav">⏭</text></g>
+                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">T</text><text x="38" y="40" class="sym">(</text><text x="38" y="16" class="acc">í</text><text x="38" y="40" class="nav">↑</text></g>
                     <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">M</text><text x="38" y="40" class="sym">{</text><text x="38" y="16" class="acc" style="font-size:10px;">redo</text><text x="38" y="40" class="nav">3</text></g>
                 </g>
                 <g class="col_4">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">C</text><text x="38" y="40" class="sym">]</text><text x="38" y="16" class="acc">ü</text><text x="38" y="40" class="nav">↘</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">S</text><text x="38" y="40" class="sym">)</text><text x="38" y="16" class="acc">ñ</text><text x="38" y="40" class="nav">→</text></g>
+                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">C</text><text x="38" y="40" class="sym">]</text><text x="38" y="16" class="acc">ñ</text><text x="38" y="40" class="nav">↘</text></g>
+                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">S</text><text x="38" y="40" class="sym">)</text><text x="38" y="16" class="acc">ó</text><text x="38" y="40" class="nav">→</text></g>
                     <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">G</text><text x="38" y="40" class="sym">}</text><text x="38" y="16" class="acc" style="font-size:10px;">cut</text><text x="38" y="40" class="nav">0</text></g>
                 </g>
                 <g class="col_5">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">V</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc">ä</text><text x="38" y="40" class="nav"></text></g>
+                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">V</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc" style="font-size:10px">all</text><text x="38" y="40" class="nav"></text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">F</text><text x="38" y="40" class="sym">`</text><text x="38" y="16" class="acc" style="font-size:10px;">paste</text><text x="38" y="40" class="nav">⇟</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">W</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc" style="font-size:10px;">copy</text><text x="38" y="40" class="nav">°</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">W</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc" style="font-size:10px;">copy</text><text x="38" y="40" class="nav">%</text></g>
                 </g>
                 <g class="col_mid_L specialKey">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="26"/><text x="26" y="26">Vol</text></g>
@@ -427,9 +445,9 @@
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="6"/><text x="26" y="26">Alt</text></g>
                 </g>
                 <g class="col_6">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Z</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc">æ</text><text x="38" y="40" class="nav"></text></g>
+                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Z</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc"></text><text x="38" y="40" class="nav"></text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Y</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc">œ</text><text x="38" y="40" class="nav">⇞</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">K</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc"></text><text x="38" y="40" class="nav">=</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">K</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc">æ</text><text x="38" y="40" class="nav">=</text></g>
                 </g>
                 <g class="col_7">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">"</text><text x="14" y="40" class="level1">'</text><text x="38" y="40" class="sym">&lt;</text><text x="38" y="16" class="acc">î</text><text x="38" y="40" class="nav">↖</text></g>
@@ -439,12 +457,12 @@
                 <g class="col_8">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">O</text><text x="38" y="40" class="sym">&gt;</text><text x="38" y="16" class="acc">ê</text><text x="38" y="40" class="nav">f2</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">E</text><text x="38" y="40" class="sym">@</text><text x="38" y="16" class="acc">à</text><text x="38" y="40" class="nav">4</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">?</text><text x="14" y="40" class="level1">,</text><text x="38" y="40" class="sym">%</text><text x="38" y="16" class="acc">â</text><text x="38" y="40" class="nav">8</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">?</text><text x="14" y="40" class="level1">,</text><text x="38" y="40" class="sym">%</text><text x="38" y="16" class="acc">ô</text><text x="38" y="40" class="nav">8</text></g>
                 </g>
                 <g class="col_9">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">U</text><text x="38" y="40" class="sym">\</text><text x="38" y="16" class="acc">ù</text><text x="38" y="40" class="nav">f4</text></g>
                     <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">I</text><text x="38" y="40" class="sym">/</text><text x="38" y="16" class="acc">è</text><text x="38" y="40" class="nav">5</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">!</text><text x="14" y="40" class="level1">.</text><text x="38" y="40" class="sym">|</text><text x="38" y="16" class="acc">ô</text><text x="38" y="40" class="nav">9</text></g>
+                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">!</text><text x="14" y="40" class="level1">.</text><text x="38" y="40" class="sym">|</text><text x="38" y="16" class="acc">â</text><text x="38" y="40" class="nav">9</text></g>
                 </g>
                 <g class="col_0">
                     <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">X</text><text x="38" y="40" class="sym">$</text><text x="38" y="16" class="acc">û</text><text x="38" y="40" class="nav">f11</text></g>
@@ -477,28 +495,28 @@
 <div class="layers-grid">
     <div class="kb-section layer-normal">
         <div class="layer-title">1. Alpha Layer</div>
-        <div class="target"></div>
+        <div class="kb-wrapper target"></div>
     </div>
     <div class="kb-section layer-acc">
         <div class="layer-title">
             2. Accents Layer (★)
             <span class="layer-subtitle">One Shot Layer</span>
         </div>
-        <div class="target"></div>
+        <div class="kb-wrapper target"></div>
     </div>
     <div class="kb-section layer-sym">
         <div class="layer-title">
             3. Symbol Layer (AltGr)
             <span class="layer-subtitle">One Shot Layer</span>
         </div>
-        <div class="target"></div>
+        <div class="kb-wrapper target"></div>
     </div>
     <div class="kb-section layer-nav">
         <div class="layer-title">
             4. Navigation Layer (Nav)
             <span class="layer-subtitle">Momentary Layer</span>
         </div>
-        <div class="target"></div>
+        <div class="kb-wrapper target"></div>
     </div>
 </div>
 
@@ -559,7 +577,7 @@
     renderOrtho();
     const masterHTML = document.getElementById('master-svg').innerHTML;
     document.querySelectorAll('.target').forEach(el => {
-        el.innerHTML = `<svg viewBox="0 0 1080 300">${masterHTML}</svg>`;
+        el.innerHTML = masterHTML; // On injecte directement le contenu
     });
 </script>
 </body>
