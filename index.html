@@ -376,30 +376,34 @@
         .thb_7 g { transform: rotate(-12deg); } .thb_6 g { transform: rotate(-24deg); }
 
         /* Piantor Alignments (Centered in 1080x320) */
-        #piantor-left  { transform: translate(115px, 25px); }
-        #piantor-right { transform: translate(625px, 25px); }
+        #piantor-left  { transform: translate(64px, 7px); }
+        #piantor-right { transform: translate(674px, 7px); }
 
-        .p-col_0 { transform: translate(0px, 28px); }
-        .p-col_1 { transform: translate(58px, 24px); }
-        .p-col_2 { transform: translate(116px, 8px); }
+        /* Left columns (X pitch: 58px, ergonomic vertical offsets) */
+        .p-col_0 { transform: translate(0px, 52px); }
+        .p-col_1 { transform: translate(58px, 52px); }
+        .p-col_2 { transform: translate(116px, 20px); }
         .p-col_3 { transform: translate(174px, 0px); }
-        .p-col_4 { transform: translate(232px, 10px); }
-        .p-col_5 { transform: translate(290px, 18px); }
+        .p-col_4 { transform: translate(232px, 28px); }
+        .p-col_5 { transform: translate(290px, 40px); }
 
-        .p-col_6 { transform: translate(0px, 18px); }
-        .p-col_7 { transform: translate(58px, 10px); }
-        .p-col_8 { transform: translate(116px, 0px); }
-        .p-col_9 { transform: translate(174px, 8px); }
-        .p-col_10 { transform: translate(232px, 24px); }
-        .p-col_11 { transform: translate(290px, 28px); }
+        /* Right columns (X pitch: 58px, symmetrical vertical offsets) */
+        .p-col_6  { transform: translate(0px, 40px); }
+        .p-col_7  { transform: translate(58px, 28px); }
+        .p-col_8  { transform: translate(116px, 0px); }
+        .p-col_9  { transform: translate(174px, 20px); }
+        .p-col_10 { transform: translate(232px, 52px); }
+        .p-col_11 { transform: translate(290px, 52px); }
 
-        .p-thb_1 { transform: translate(180px, 192px) rotate(8deg); }
-        .p-thb_2 { transform: translate(242px, 197px) rotate(18deg); }
-        .p-thb_3 { transform: translate(304px, 208px) rotate(28deg); }
+        /* Left thumb cluster (arc: 8°, 18°, 28°) */
+        .p-thb_1 { transform: translate(250px, 238px) rotate(8deg); }
+        .p-thb_2 { transform: translate(314px, 250px) rotate(18deg); }
+        .p-thb_3 { transform: translate(378px, 272px) rotate(28deg); }
 
-        .p-thb_4 { transform: translate(44px, 208px) rotate(-28deg); }
-        .p-thb_5 { transform: translate(106px, 197px) rotate(-18deg); }
-        .p-thb_6 { transform: translate(168px, 192px) rotate(-8deg); }
+        /* Right thumb cluster (arc: -28°, -18°, -8°) */
+        .p-thb_4 { transform: translate(-36px, 272px) rotate(-28deg); }
+        .p-thb_5 { transform: translate(28px, 250px) rotate(-18deg); }
+        .p-thb_6 { transform: translate(92px, 238px) rotate(-8deg); }
 
         /* Classic ISO Alignments (Centered in 1080x320) */
         #rowstag-wrapper { transform: translate(153px, 27px); }
@@ -468,7 +472,7 @@
             <h1>Rosellæ</h1>
             <p>Layout optimised for 50/50 French & English + compatible for Spanish</p>
         </div>
-        <div class="badge" id="layout-badge">Corne | 46-keys</div>
+        <div class="badge" id="layout-badge">Piantor | 42-keys</div>
     </div>
     <div class="dashboard-main">
         <div class="stats-horizontal">
@@ -518,8 +522,8 @@
     <div class="layer-header-container">
         <div class="layer-title">All Layers (Reference)</div>
         <div class="switch-group">
-            <button class="ctrl-btn active" id="btn-corne" onclick="setGeometry('corne')">Corne | 46-keys</button>
-            <button class="ctrl-btn" id="btn-piantor" onclick="setGeometry('piantor')">Piantor | 42-keys</button>
+            <button class="ctrl-btn" id="btn-corne" onclick="setGeometry('corne')">Corne | 46-keys</button>
+            <button class="ctrl-btn active" id="btn-piantor" onclick="setGeometry('piantor')">Piantor | 42-keys</button>
             <button class="ctrl-btn" id="btn-rowstag" onclick="setGeometry('rowstag')">Classic ISO | Min. 39-keys</button>
         </div>
     </div>
@@ -655,78 +659,104 @@
         </g>
     </svg>
 
-    <!-- 2. PIANTOR TEMPLATE -->
+    <!-- 2. PIANTOR TEMPLATE (42 keys, 58px pitch, 52x52 keycaps) -->
     <svg id="tpl-piantor" viewBox="0 0 1080 320" xmlns="http://www.w3.org/2000/svg">
         <g id="piantor-left">
+            <!-- Col 0: Pinky Outer (Esc, Tab, Super) -->
             <g class="p-col_0 specialKey">
-                <g transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="25" y="25">⎋</text></g>
-                <g transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="25" y="25">↹</text></g>
-                <g transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="25" y="25">❖</text></g>
+                <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⎋</text></g>
+                <g transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="26" y="26">↹</text></g>
+                <g transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="26" y="26">❖</text></g>
             </g>
+            <!-- Col 1: Pinky (B, N, QU) -->
             <g class="p-col_1">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">B</text><text x="36" y="36" class="sym">~</text><text x="34" y="16" class="acc">^z</text><text x="36" y="36" class="nav">⏮</text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">N</text><text x="36" y="36" class="sym">+</text><text x="36" y="16" class="acc">æ</text><text x="36" y="36" class="nav">←</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1" style="font-size:14px;">QU</text><text x="36" y="36" class="sym">Qu</text><text x="36" y="16" class="acc">q</text><text x="36" y="36" class="nav">1</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">B</text><text x="38" y="38" class="sym">~</text><text x="36" y="16" class="acc">^z</text><text x="38" y="38" class="nav">⏮</text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">N</text><text x="38" y="38" class="sym">+</text><text x="38" y="16" class="acc">æ</text><text x="38" y="38" class="nav">←</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:14px;">QU</text><text x="38" y="38" class="sym">Qu</text><text x="38" y="16" class="acc">q</text><text x="38" y="38" class="nav">1</text></g>
             </g>
+            <!-- Col 2: Ring (L, R, J) -->
             <g class="p-col_2">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">L</text><text x="36" y="36" class="sym">*</text><text x="34" y="16" class="acc">^y</text><text x="36" y="36" class="nav">⏯</text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">R</text><text x="36" y="36" class="sym">=</text><text x="36" y="16" class="acc">ñ</text><text x="36" y="36" class="nav">↓</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">J</text><text x="36" y="36" class="sym">€</text><text x="34" y="16" class="acc">^x</text><text x="36" y="36" class="nav">2</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">L</text><text x="38" y="38" class="sym">*</text><text x="36" y="16" class="acc">^y</text><text x="38" y="38" class="nav">⏯</text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">R</text><text x="38" y="38" class="sym">=</text><text x="38" y="16" class="acc">ñ</text><text x="38" y="38" class="nav">↓</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">J</text><text x="38" y="38" class="sym">€</text><text x="36" y="16" class="acc">^x</text><text x="38" y="38" class="nav">2</text></g>
             </g>
+            <!-- Col 3: Middle (D, T, M) -->
             <g class="p-col_3">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">D</text><text x="36" y="36" class="sym">[</text><text x="36" y="16" class="acc">ö</text><text x="36" y="36" class="nav">⏭</text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">T</text><text x="36" y="36" class="sym">(</text><text x="36" y="16" class="acc">œ</text><text x="36" y="38" class="nav">↑</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">M</text><text x="36" y="36" class="sym">{</text><text x="34" y="16" class="acc">^c</text><text x="36" y="36" class="nav">3</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">D</text><text x="38" y="38" class="sym">[</text><text x="38" y="16" class="acc">ö</text><text x="38" y="38" class="nav">⏭</text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">T</text><text x="38" y="38" class="sym">(</text><text x="38" y="16" class="acc">œ</text><text x="38" y="38" class="nav">↑</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">M</text><text x="38" y="38" class="sym">{</text><text x="36" y="16" class="acc">^c</text><text x="38" y="38" class="nav">3</text></g>
             </g>
+            <!-- Col 4: Index (C, S, G) -->
             <g class="p-col_4">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">C</text><text x="36" y="36" class="sym">]</text><text x="36" y="16" class="acc">ü</text><text x="36" y="36" class="nav">↘</text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">S</text><text x="36" y="36" class="sym">)</text><text x="36" y="16" class="acc">ë</text><text x="36" y="36" class="nav">→</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">G</text><text x="36" y="36" class="sym">}</text><text x="34" y="16" class="acc">^v</text><text x="36" y="36" class="nav">0</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">C</text><text x="38" y="38" class="sym">]</text><text x="38" y="16" class="acc">ü</text><text x="38" y="38" class="nav">↘</text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">S</text><text x="38" y="38" class="sym">)</text><text x="38" y="16" class="acc">ë</text><text x="38" y="38" class="nav">→</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">G</text><text x="38" y="38" class="sym">}</text><text x="36" y="16" class="acc">^v</text><text x="38" y="38" class="nav">0</text></g>
             </g>
+            <!-- Col 5: Inner Index (V, F, W) -->
             <g class="p-col_5">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">V</text><text x="36" y="36" class="sym">^</text><text x="36" y="16" class="acc"></text><text x="36" y="36" class="nav"></text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">F</text><text x="36" y="36" class="sym">`</text><text x="36" y="16" class="acc">ä</text><text x="36" y="36" class="nav">⇟</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">W</text><text x="36" y="36" class="sym"></text><text x="34" y="16" class="acc">^a</text><text x="36" y="36" class="nav">%</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">V</text><text x="38" y="38" class="sym">^</text><text x="38" y="16" class="acc"></text><text x="38" y="38" class="nav"></text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">F</text><text x="38" y="38" class="sym">`</text><text x="38" y="16" class="acc">ä</text><text x="38" y="38" class="nav">⇟</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">W</text><text x="38" y="38" class="sym"></text><text x="36" y="16" class="acc">^a</text><text x="38" y="38" class="nav">%</text></g>
             </g>
-            <g class="p-thb_1" id="acc-key"><rect width="50" height="50" rx="6"/><text x="25" y="25" class="acc-star">★</text></g>
-            <g class="p-thb_2 specialKey"><rect width="50" height="50" rx="6"/><text x="25" y="25">Shift</text></g>
-            <g class="p-thb_3 specialKey"><rect width="50" height="50" rx="6"/><text x="25" y="25">Ctrl</text></g>
+            <!-- Left Thumb Cluster (pivoted around key center) -->
+            <g class="p-thb_1" id="acc-key">
+                <g transform="translate(-26 -26)"><rect width="52" height="52" rx="5"/><text x="26" y="26" class="acc-star">★</text></g>
+            </g>
+            <g class="p-thb_2 specialKey">
+                <g transform="translate(-26 -26)"><rect width="52" height="52" rx="5"/><text x="26" y="26">Shift</text></g>
+            </g>
+            <g class="p-thb_3 specialKey">
+                <g transform="translate(-26 -26)"><rect width="52" height="52" rx="5"/><text x="26" y="26">Ctrl</text></g>
+            </g>
         </g>
 
         <g id="piantor-right">
+            <!-- Col 6: Inner Index (Z, Y, K) -->
             <g class="p-col_6">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">Z</text><text x="36" y="36" class="sym"></text><text x="36" y="16" class="acc">ú</text><text x="36" y="36" class="nav"></text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">Y</text><text x="36" y="36" class="sym"></text><text x="36" y="16" class="acc">ó</text><text x="36" y="36" class="nav">⇞</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">K</text><text x="36" y="36" class="sym"></text><text x="36" y="16" class="acc">í</text><text x="36" y="36" class="nav">=</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Z</text><text x="38" y="38" class="sym"></text><text x="38" y="16" class="acc">ú</text><text x="38" y="38" class="nav"></text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Y</text><text x="38" y="38" class="sym"></text><text x="38" y="16" class="acc">ó</text><text x="38" y="38" class="nav">⇞</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">K</text><text x="38" y="38" class="sym"></text><text x="38" y="16" class="acc">í</text><text x="38" y="38" class="nav">=</text></g>
             </g>
+            <!-- Col 7: Index (', H, P) -->
             <g class="p-col_7">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level2">"</text><text x="14" y="36" class="level1">'</text><text x="36" y="36" class="sym">&lt;</text><text x="36" y="16" class="acc">î</text><text x="36" y="36" class="nav">↖</text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">H</text><text x="36" y="36" class="sym">_</text><text x="36" y="16" class="acc">ç</text><text x="36" y="36" class="nav">,</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">P</text><text x="36" y="36" class="sym">#</text><text x="36" y="16" class="acc">â</text><text x="36" y="36" class="nav">7</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">"</text><text x="14" y="38" class="level1">'</text><text x="38" y="38" class="sym">&lt;</text><text x="38" y="16" class="acc">î</text><text x="38" y="38" class="nav">↖</text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">H</text><text x="38" y="38" class="sym">_</text><text x="38" y="16" class="acc">ç</text><text x="38" y="38" class="nav">,</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">P</text><text x="38" y="38" class="sym">#</text><text x="38" y="16" class="acc">â</text><text x="38" y="38" class="nav">7</text></g>
             </g>
+            <!-- Col 8: Middle (O, E, ,) -->
             <g class="p-col_8">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">O</text><text x="36" y="36" class="sym">&gt;</text><text x="36" y="16" class="acc">ê</text><text x="36" y="36" class="nav">f2</text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">E</text><text x="36" y="36" class="sym">@</text><text x="36" y="16" class="acc">à</text><text x="36" y="36" class="nav">4</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level2">?</text><text x="14" y="36" class="level1">,</text><text x="36" y="36" class="sym">%</text><text x="36" y="16" class="acc">ô</text><text x="36" y="36" class="nav">8</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">O</text><text x="38" y="38" class="sym">&gt;</text><text x="38" y="16" class="acc">ê</text><text x="38" y="38" class="nav">f2</text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">E</text><text x="38" y="38" class="sym">@</text><text x="38" y="16" class="acc">à</text><text x="38" y="38" class="nav">4</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">?</text><text x="14" y="38" class="level1">,</text><text x="38" y="38" class="sym">%</text><text x="38" y="16" class="acc">ô</text><text x="38" y="38" class="nav">8</text></g>
             </g>
+            <!-- Col 9: Ring (U, I, .) -->
             <g class="p-col_9">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">U</text><text x="36" y="36" class="sym">\</text><text x="36" y="16" class="acc">ù</text><text x="36" y="36" class="nav">f4</text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">I</text><text x="36" y="36" class="sym">/</text><text x="36" y="16" class="acc">è</text><text x="36" y="36" class="nav">5</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level2">!</text><text x="14" y="36" class="level1">.</text><text x="36" y="36" class="sym">|</text><text x="36" y="16" class="acc">ï</text><text x="36" y="36" class="nav">9</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">U</text><text x="38" y="38" class="sym">\</text><text x="38" y="16" class="acc">ù</text><text x="38" y="38" class="nav">f4</text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">I</text><text x="38" y="38" class="sym">/</text><text x="38" y="16" class="acc">è</text><text x="38" y="38" class="nav">5</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">!</text><text x="14" y="38" class="level1">.</text><text x="38" y="38" class="sym">|</text><text x="38" y="16" class="acc">ï</text><text x="38" y="38" class="nav">9</text></g>
             </g>
+            <!-- Col 10: Pinky (X, A, :) -->
             <g class="p-col_10">
-                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">X</text><text x="36" y="36" class="sym">$</text><text x="36" y="16" class="acc">û</text><text x="36" y="36" class="nav">f11</text></g>
-                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">A</text><text x="36" y="36" class="sym">-</text><text x="36" y="16" class="acc">é</text><text x="36" y="36" class="nav">6</text></g>
-                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level2">;</text><text x="14" y="36" class="level1">:</text><text x="36" y="36" class="sym">&amp;</text><text x="36" y="16" class="acc">á</text><text x="36" y="36" class="nav">.</text></g>
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">X</text><text x="38" y="38" class="sym">$</text><text x="38" y="16" class="acc">û</text><text x="38" y="38" class="nav">f11</text></g>
+                <g class="corne-key" transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">A</text><text x="38" y="38" class="sym">-</text><text x="38" y="16" class="acc">é</text><text x="38" y="38" class="nav">6</text></g>
+                <g class="corne-key" transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">;</text><text x="14" y="38" class="level1">:</text><text x="38" y="38" class="sym">&amp;</text><text x="38" y="16" class="acc">á</text><text x="38" y="38" class="nav">.</text></g>
             </g>
+            <!-- Col 11: Pinky Outer (Backspace, Enter, Modifiers) -->
             <g class="p-col_11 specialKey">
-                <g transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="25" y="25">⌫</text></g>
-                <g transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="25" y="25">⏎</text></g>
-                <g transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="25" y="25">⌃⇧</text></g>
+                <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⌫</text></g>
+                <g transform="translate(0 58)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⏎</text></g>
+                <g transform="translate(0 116)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⌃⇧</text></g>
             </g>
-            <g class="p-thb_4 specialKey" id="nav-key"><rect width="50" height="50" rx="6"/><text x="25" y="25" style="font-size:12px;">Nav</text></g>
-            <g class="p-thb_5 specialKey"><rect width="50" height="50" rx="6"/><text x="25" y="25" style="font-size:18px;">⎵</text></g>
-            <g class="p-thb_6" id="sym-key"><rect width="50" height="50" rx="6"/><text x="25" y="25" style="font-size:13px;">AltGr</text></g>
+            <!-- Right Thumb Cluster (pivoted around key center) -->
+            <g class="p-thb_4 specialKey" id="nav-key">
+                <g transform="translate(-26 -26)"><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:12px;">Nav</text></g>
+            </g>
+            <g class="p-thb_5 specialKey">
+                <g transform="translate(-26 -26)"><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:18px;">⎵</text></g>
+            </g>
+            <g class="p-thb_6" id="sym-key">
+                <g transform="translate(-26 -26)"><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:13px;">AltGr</text></g>
+            </g>
         </g>
     </svg>
 
@@ -848,7 +878,7 @@
 </div>
 
 <script>
-    let currentGeometry = 'corne';
+    let currentGeometry = 'piantor';
 
     function setTheme(theme) {
         const body = document.body;
