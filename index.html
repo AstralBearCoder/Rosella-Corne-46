@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corne Keyboard - Rosellæ Layout</title>
+    <title>Rosellæ - Corne | 46-keys, Piantor | 42-keys & Classic ISO | Min. 39-keys</title>
     <style>
         :root {
-            /* Couleurs Dark (Défaut) */
+            /* Dark Theme Colors (Default) */
             --bg-page: #0a0a0a;
             --bg-card: #121212;
             --bg-inset: #1a1a1a;
@@ -16,10 +16,21 @@
             --text-main: #eee;
             --text-muted: #999;
             --text-dim: #666;
-            --key-fill: #222;
+            --key-fill: #202020;
             --stroke: #333;
             --svg-text: #888;
-            --special-key-text: #aaa;
+            --special-key-text: #bbb;
+            --special-bg: #181818;
+
+            /* Modifier Hold Box */
+            --mod-box-bg: #282828;
+            --mod-box-border: #444;
+            --mod-box-text: #bbb;
+
+            /* Unused Keys */
+            --unused-fill: #151515;
+            --unused-stroke: #2a2a2a;
+            --unused-cross: #4a4a4a;
 
             --f-pinky: rgba(255, 100, 100, 0.12);
             --f-ring: rgba(255, 200, 100, 0.12);
@@ -27,18 +38,26 @@
             --f-index: rgba(100, 150, 255, 0.18);
         }
 
-        /* Couleurs Light Mode - Atténuées */
         [data-theme="light"] {
             --bg-page: #d1d1d6;
             --bg-card: #e5e5ea;
             --bg-inset: #bcbcc0;
             --text-main: #1a1a1a;
             --text-muted: #444;
-            --text-dim: #666;
-            --key-fill: #f2f2f7;
+            --text-dim: #777;
+            --key-fill: #f4f4f8;
             --stroke: #a1a1aa;
             --svg-text: #333;
-            --special-key-text: #000;
+            --special-key-text: #111;
+            --special-bg: #dcdce0;
+
+            --mod-box-bg: #dadade;
+            --mod-box-border: #ababaf;
+            --mod-box-text: #111;
+
+            --unused-fill: #e8e8ed;
+            --unused-stroke: #c2c2c7;
+            --unused-cross: #999;
 
             --f-pinky: rgba(255, 100, 100, 0.08);
             --f-ring: rgba(255, 200, 100, 0.08);
@@ -46,23 +65,25 @@
             --f-index: rgba(100, 150, 255, 0.12);
         }
 
+        * { box-sizing: border-box; }
+
         body {
             background-color: var(--bg-page);
             color: var(--text-main);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 15px; /* Réduit pour mobile */
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-sizing: border-box;
             transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            width: 100%;
         }
 
-        @media (min-width: 768px) { body { padding: 40px; } }
+        @media (min-width: 768px) { body { padding: 35px 20px; } }
 
-        /* SÉLECTEUR DE THÈME EN HAUT */
-        .theme-switcher-container {
+        .top-bar {
             width: 100%;
             max-width: 1200px;
             display: flex;
@@ -70,28 +91,15 @@
             margin-bottom: 20px;
         }
 
-        .theme-switcher {
+        .switch-group {
             background: var(--bg-card);
             border: 1px solid var(--stroke);
-            padding: 5px;
+            padding: 4px;
             border-radius: 50px;
-            display: flex;
-            gap: 5px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        /* SÉLECTEUR DE COUCHES (CORRIGÉ POUR MOBILE) */
-        .layout-switcher {
-            margin: 25px auto 0 auto;
-            background: var(--bg-inset);
-            border: 1px solid var(--stroke);
-            padding: 5px;
-            border-radius: 25px; /* Plus flexible que 50px pour le wrap */
-            display: flex;
-            gap: 5px;
-            width: fit-content;
-            max-width: 100%;
-            flex-wrap: wrap; /* Permet aux boutons de passer à la ligne sur petit écran */
+            display: inline-flex;
+            gap: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
             justify-content: center;
         }
 
@@ -99,14 +107,14 @@
             border: none;
             background: transparent;
             color: var(--text-muted);
-            padding: 8px 18px;
+            padding: 8px 16px;
             border-radius: 40px;
             cursor: pointer;
             font-weight: 700;
             font-size: 0.75rem;
             text-transform: uppercase;
             transition: 0.2s;
-            white-space: nowrap; /* Empêche le texte du bouton de se couper */
+            white-space: nowrap;
         }
 
         .ctrl-btn.active {
@@ -117,25 +125,24 @@
         .intro-card {
             background: var(--bg-card);
             border-radius: 20px;
-            padding: 20px;
+            padding: 24px;
             width: 100%;
             max-width: 1200px;
             margin: 0 auto 30px auto;
             border: 1px solid var(--stroke);
             box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            box-sizing: border-box;
         }
 
-        .header-top { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+        .header-top { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; }
         @media (min-width: 768px) { .header-top { flex-direction: row; justify-content: space-between; align-items: flex-start; } }
 
-        .header-top h1 { margin: 0; font-size: 1.8rem; font-weight: 600; letter-spacing: -1px; }
-        .header-top p { margin: 5px 0 0 0; color: var(--text-muted); font-size: 1.1rem; }
+        .header-top h1 { margin: 0; font-size: 1.8rem; font-weight: 700; letter-spacing: -1px; }
+        .header-top p { margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.95rem; }
 
         .badge {
             background: var(--accent-nav);
             color: #000;
-            padding: 8px 20px;
+            padding: 8px 18px;
             border-radius: 6px;
             font-weight: 800;
             font-size: 0.8rem;
@@ -146,24 +153,25 @@
         .dashboard-main {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 25px;
             border-top: 1px solid var(--stroke);
-            padding-top: 30px;
+            padding-top: 25px;
         }
 
         .stats-horizontal {
             display: flex;
             justify-content: space-between;
-            gap: 20px;
+            gap: 15px;
             width: 100%;
             flex-wrap: wrap;
         }
+
         .stat-item {
             flex: 1;
-            min-width: 250px;
-            background: rgba(128,128,128,0.05);
-            padding: 15px;
-            border-radius: 8px;
+            min-width: 240px;
+            background: rgba(128,128,128,0.04);
+            padding: 15px 20px;
+            border-radius: 12px;
             border: 1px solid var(--stroke);
             position: relative;
             overflow: hidden;
@@ -180,14 +188,14 @@
         }
 
         .stat-content { position: relative; z-index: 1; }
-        .stat-lang { color: var(--accent-nav); font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; display: block; }
-        .stat-meta { color: var(--text-dim); font-size: 0.7rem; font-family: monospace; display: block; margin-bottom: 10px; }
+        .stat-lang { color: var(--accent-nav); font-weight: 700; font-size: 0.95rem; margin-bottom: 5px; display: block; }
+        .stat-meta { color: var(--text-dim); font-size: 0.75rem; font-family: monospace; display: block; margin-bottom: 8px; }
         .stat-values { display: flex; gap: 15px; font-size: 0.85rem; }
         .stat-label { color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; margin-right: 5px; }
-        .stat-numb { color: var(--text-main); font-family: 'JetBrains Mono', monospace; }
+        .stat-numb { color: var(--text-main); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
 
-        .ortho-box { background: var(--bg-inset); padding: 25px; border-radius: 12px; overflow-x: auto; width: 100%; box-sizing: border-box; max-width: 700px; margin: 0 auto;}
-        .ortho-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 20px; display: block; text-align: center; font-weight: 600; }
+        .ortho-box { background: var(--bg-inset); padding: 20px; border-radius: 14px; overflow-x: auto; width: 100%; max-width: 720px; margin: 0 auto; }
+        .ortho-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 15px; display: block; text-align: center; font-weight: 700; }
 
         .ortho-grid {
             display: grid;
@@ -199,13 +207,12 @@
         }
 
         .ortho-key {
-            aspect-ratio: 1.2;
+            aspect-ratio: 1.15;
             background: var(--key-fill);
             border: 1px solid var(--stroke);
             display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; color: var(--text-main); border-radius: 4px;
+            font-size: 0.95rem; font-weight: 600; color: var(--text-main); border-radius: 5px;
             text-transform: uppercase;
-            box-sizing: border-box;
         }
         .ortho-gap { grid-column: 6; }
 
@@ -216,14 +223,17 @@
 
         .kb-section {
             background: var(--bg-card);
-            padding: 15px;
-            border-radius: 15px;
+            padding: 20px 15px;
+            border-radius: 18px;
             border: 1px solid var(--stroke);
-            box-sizing: border-box;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        @media (min-width: 768px) { .kb-section { padding: 35px; } }
-        .kb-section.full { width: 100%; max-width: 1200px; margin-bottom: 40px; }
+        @media (min-width: 768px) { .kb-section { padding: 25px 20px; } }
+        .kb-section.full { width: 100%; max-width: 1200px; margin-bottom: 30px; }
 
         .layers-grid {
             display: grid;
@@ -231,20 +241,28 @@
             gap: 20px;
             width: 100%;
             max-width: 1200px;
-            box-sizing: border-box;
         }
-        @media (min-width: 992px) { .layers-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
+        @media (min-width: 1100px) { .layers-grid { grid-template-columns: 1fr 1fr; } }
+
+        .layer-header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            width: 100%;
+            border-bottom: 1px solid var(--stroke);
+            padding-bottom: 12px;
+        }
 
         .layer-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-main);
-            margin-bottom: 30px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-align: center;
-            border-bottom: 1px solid var(--stroke);
-            padding-bottom: 15px;
-            font-weight: 600;
+            font-weight: 700;
+            margin: 0;
         }
 
         .layer-subtitle {
@@ -253,40 +271,97 @@
             color: var(--text-muted);
             text-transform: none;
             letter-spacing: 0;
-            margin-top: 5px;
             font-weight: 400;
         }
 
-        /* CONTENEUR SVG POUR LE RESPONSIVE */
+        /* Stable container with fixed ratio to eliminate layout shift */
         .kb-wrapper {
             width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 10px;
+            max-width: 980px;
+            aspect-ratio: 1080 / 320;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0 auto;
         }
 
         svg {
-            min-width: 700px; /* Force une largeur minimale pour la lisibilité sur mobile */
             width: 100%;
-            height: auto;
+            height: 100%;
             display: block;
             margin: 0 auto;
         }
 
-        rect { fill: var(--key-fill); stroke: var(--stroke); stroke-width: 0.6px; transition: fill 0.3s, stroke 0.3s; }
-        text { fill: var(--svg-text); font-size: 17px; text-anchor: middle; dominant-baseline: middle; transition: fill 0.3s; }
-        .specialKey text { font-size: 18px; fill: var(--special-key-text); }
+        rect, path {
+            fill: var(--key-fill);
+            stroke: var(--stroke);
+            stroke-width: 0.8px;
+            transition: fill 0.3s, stroke 0.3s;
+        }
+
+        text {
+            fill: var(--svg-text);
+            font-size: 16px;
+            font-weight: 500;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            user-select: none;
+        }
+
+        /* Unused keys */
+        .key-unused rect, .key-unused path {
+            fill: var(--unused-fill) !important;
+            stroke: var(--unused-stroke) !important;
+        }
+        .key-unused text {
+            fill: var(--unused-cross) !important;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        /* Modifiers Hold Box */
+        .hold-box rect {
+            fill: var(--mod-box-bg) !important;
+            stroke: var(--mod-box-border) !important;
+            stroke-width: 0.8px;
+        }
+        .hold-box text {
+            fill: var(--mod-box-text) !important;
+            font-size: 10px !important;
+            font-weight: 700 !important;
+        }
+
+        /* NAV pill on Space key */
+        .hold-pill.nav-pill rect {
+            fill: var(--accent-nav) !important;
+            stroke: none !important;
+        }
+        .hold-pill.nav-pill text {
+            fill: #000 !important;
+            font-weight: 800 !important;
+            font-size: 11px !important;
+            letter-spacing: 1px;
+        }
+
+        .specialKey rect, .specialKey path { fill: var(--special-bg); }
+        .specialKey text { font-size: 13px; fill: var(--special-key-text); font-weight: 600; }
         .col_mid_L text, .col_mid_R text { font-size: 11px; fill: var(--text-dim); }
 
-        #nav-key rect { fill: var(--accent-nav); stroke: none; }
-        #nav-key text { fill: #000 !important; font-weight: 500; }
-        #sym-key rect { fill: var(--accent-sym); stroke: none; }
-        #sym-key text { fill: #fff !important; font-weight: 500; }
-        #acc-key rect { fill: var(--accent-acc); stroke: none; }
-        #acc-key text { fill: #fff !important; }
+        #nav-key rect, .nav-key rect { fill: var(--accent-nav); stroke: none; }
+        #nav-key text, .nav-key text { fill: #000 !important; font-weight: 700; }
+        #sym-key rect, .sym-key rect { fill: var(--accent-sym); stroke: none; }
+        #sym-key text, .sym-key text { fill: #fff !important; font-weight: 700; }
+        #acc-key rect, .acc-key rect { fill: var(--accent-acc); stroke: none; }
+        #acc-key text, .acc-key text { fill: #fff !important; }
 
-        #left  { transform: translate(4px, 15px); }
-        #right { transform: translate(600px, 15px); }
+        .onoff-key rect { stroke: var(--accent-nav); stroke-dasharray: 3, 3; }
+        .onoff-key text { fill: var(--accent-nav); font-size: 11px; font-weight: 700; }
+
+        /* Corne Alignments (Centered in 1080x320) */
+        #left  { transform: translate(65px, 20px); }
+        #right { transform: translate(661px, 20px); }
+
         .col_L { transform: translate(0px, 22.5px); } .col_1 { transform: translate(60px, 22.5px); }
         .col_2 { transform: translate(120px, 7.5px); } .col_3 { transform: translate(180px, 0.0px); }
         .col_4 { transform: translate(240px, 7.5px); } .col_5 { transform: translate(300px, 15.0px); }
@@ -294,51 +369,94 @@
         .col_6 { transform: translate(0px, 15.0px); } .col_7 { transform: translate(60px, 7.5px); }
         .col_8 { transform: translate(120px, 0.0px); } .col_9 { transform: translate(180px, 7.5px); }
         .col_0 { transform: translate(240px, 22.5px); } .col_R { transform: translate(300px, 22.5px); }
+
         .thb_3 { transform: translate(210px, 190px); } .thb_4 { transform: translate(280px, 191px); } .thb_5 { transform: translate(360px, 182px); }
         .thb_8 { transform: translate(90px, 190px); } .thb_7 { transform: translate(20px, 201px); } .thb_6 { transform: translate(-57px, 201px); }
         .thb_4 g { transform: rotate(12deg); } .thb_5 g { transform: rotate(24deg); }
         .thb_7 g { transform: rotate(-12deg); } .thb_6 g { transform: rotate(-24deg); }
 
-        .target text { font-size: 20px; }
-        .sym { fill: var(--accent-sym); font-size: 15px; }
-        .acc { fill: var(--accent-acc); font-size: 18px; }
-        .nav { fill: var(--accent-nav); font-size: 22px; }
+        /* Piantor Alignments (Centered in 1080x320) */
+        #piantor-left  { transform: translate(115px, 25px); }
+        #piantor-right { transform: translate(625px, 25px); }
 
-        /* GESTION SUP / BACKSPACE (Layers 2,3,4 = Sup) */
-        .backspace-text { display: block; }
-        .delete-text { display: none; }
+        .p-col_0 { transform: translate(0px, 28px); }
+        .p-col_1 { transform: translate(58px, 24px); }
+        .p-col_2 { transform: translate(116px, 8px); }
+        .p-col_3 { transform: translate(174px, 0px); }
+        .p-col_4 { transform: translate(232px, 10px); }
+        .p-col_5 { transform: translate(290px, 18px); }
 
+        .p-col_6 { transform: translate(0px, 18px); }
+        .p-col_7 { transform: translate(58px, 10px); }
+        .p-col_8 { transform: translate(116px, 0px); }
+        .p-col_9 { transform: translate(174px, 8px); }
+        .p-col_10 { transform: translate(232px, 24px); }
+        .p-col_11 { transform: translate(290px, 28px); }
+
+        .p-thb_1 { transform: translate(180px, 192px) rotate(8deg); }
+        .p-thb_2 { transform: translate(242px, 197px) rotate(18deg); }
+        .p-thb_3 { transform: translate(304px, 208px) rotate(28deg); }
+
+        .p-thb_4 { transform: translate(44px, 208px) rotate(-28deg); }
+        .p-thb_5 { transform: translate(106px, 197px) rotate(-18deg); }
+        .p-thb_6 { transform: translate(168px, 192px) rotate(-8deg); }
+
+        /* Classic ISO Alignments (Centered in 1080x320) */
+        #rowstag-wrapper { transform: translate(153px, 27px); }
+        #row_AE { transform: translate(0px, 0px); }
+        #row_AD { transform: translate(0px, 54px); }
+        #row_AC { transform: translate(0px, 108px); }
+        #row_AB { transform: translate(0px, 162px); }
+        #row_AA { transform: translate(0px, 216px); }
+
+        .sym { fill: var(--accent-sym); font-size: 14px; font-weight: 600; }
+        .acc { fill: var(--accent-acc); font-size: 14px; font-weight: 600; }
+        .nav { fill: var(--accent-nav); font-size: 14px; font-weight: 600; }
+
+        .controls-center {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        /* Alpha Management */
         .layer-normal .sym, .layer-normal .acc, .layer-normal .nav { display: none; }
-        .layer-normal .level1 { x: 26px !important; y: 26px !important; font-size: 24px; fill: var(--text-main); }
+        .layer-normal .level1 { font-size: 19px; fill: var(--text-main); }
         .layer-normal .level2 { display: none; }
-        .layer-normal g:has(.level2) .level1 { y: 38px !important; font-size: 20px; }
-        .layer-normal g:has(.level2) .level2 { display: block; x: 26px !important; y: 18px !important; font-size: 20px; fill: var(--text-muted); }
+        .layer-normal g:has(.level2) .level1 { y: 35px !important; font-size: 16px; }
+        .layer-normal g:has(.level2) .level2 { display: block; font-size: 14px; fill: var(--text-muted); }
+        .layer-normal .corne-key .level1 { x: 26px !important; y: 26px !important; font-size: 22px; }
+        .layer-normal .corne-key:has(.level2) .level1 { y: 35px !important; font-size: 18px; }
+        .layer-normal .corne-key:has(.level2) .level2 { x: 26px !important; y: 15px !important; font-size: 16px; }
+        .layer-normal .hold-box { display: block; }
+
+        /* Hide hold boxes on sub-layers */
+        .layer-acc .hold-box, .layer-sym .hold-box, .layer-nav .hold-box { display: none !important; }
 
         .layer-acc .level1, .layer-acc .level2, .layer-acc .sym, .layer-acc .nav { display: none; }
-        .layer-acc .acc { x: 26px !important; y: 26px !important; font-size: 24px; }
-        .layer-acc .delete-text { display: block; } .layer-acc .backspace-text { display: none; }
+        .layer-acc .acc { display: block; font-size: 17px; }
+        .layer-acc .corne-key .acc, .layer-acc .rowstag-key .acc { x: 24px !important; y: 23px !important; font-size: 19px; }
 
         .layer-sym .level1, .layer-sym .level2, .layer-sym .acc, .layer-sym .nav { display: none; }
-        .layer-sym .sym { x: 26px !important; y: 26px !important; font-size: 24px; }
-        .layer-sym .delete-text { display: block; } .layer-sym .backspace-text { display: none; }
+        .layer-sym .sym { display: block; font-size: 17px; }
+        .layer-sym .corne-key .sym, .layer-sym .rowstag-key .sym { x: 24px !important; y: 23px !important; font-size: 19px; }
 
         .layer-nav .sym, .layer-nav .acc, .layer-nav .level1, .layer-nav .level2 { display: none; }
-        .layer-nav .nav { display: block; x: 26px !important; y: 26px !important; }
-        .layer-nav .delete-text { display: block; } .layer-nav .backspace-text { display: none; }
+        .layer-nav .nav { display: block; font-size: 17px; }
+        .layer-nav .corne-key .nav, .layer-nav .rowstag-key .nav { x: 24px !important; y: 23px !important; font-size: 19px; }
 
-        /* FULL LAYOUT VISUAL MODES */
-        .layer-all[data-view="alpha-acc"] .sym, .layer-all[data-view="alpha-acc"] .nav { display: none; }
-        .layer-all[data-view="alpha-acc-sym"] .nav { display: none; }
-        .layer-all[data-view="alpha-acc-nav"] .sym { display: none; }
-        /* Position nav à la place d'AltGr pour le visuel combiné orange */
-        .layer-all[data-view="alpha-acc-nav"] .nav { x: 38px !important; y: 40px !important; font-size: 15px; }
-
+        /* Reference View AltGr vs Nav */
+        .layer-all[data-view="sym"] .nav { display: none; }
+        .layer-all[data-view="sym"] .sym { display: block; }
+        .layer-all[data-view="nav"] .sym { display: none; }
+        .layer-all[data-view="nav"] .nav { display: block; }
     </style>
 </head>
 <body>
 
-<div class="theme-switcher-container">
-    <div class="theme-switcher">
+<div class="top-bar">
+    <div class="switch-group">
         <button class="ctrl-btn active" id="btn-dark" onclick="setTheme('dark')">Dark</button>
         <button class="ctrl-btn" id="btn-light" onclick="setTheme('light')">Light</button>
     </div>
@@ -347,17 +465,17 @@
 <div class="intro-card">
     <div class="header-top">
         <div>
-            <h1>Rosellæ for Corne</h1>
-            <p>Optimisé pour 50/50 Français & Anglais + Espagnol<br><i>Corne keyboard, Rosellæ Layout by GalileoBlue</i></p>
+            <h1>Rosellæ</h1>
+            <p>Layout optimised for 50/50 French & English + compatible for Spanish</p>
         </div>
-        <div class="badge">40-46 key Corne Layout</div>
+        <div class="badge" id="layout-badge">Corne | 46-keys</div>
     </div>
     <div class="dashboard-main">
         <div class="stats-horizontal">
             <div class="stat-item">
                 <div class="stat-flag" style="background-image: url('https://flagcdn.com/w320/fr.png');"></div>
                 <div class="stat-content">
-                    <span class="stat-lang">Français</span>
+                    <span class="stat-lang">French</span>
                     <span class="stat-meta">lexique4_5K</span>
                     <div class="stat-values">
                         <span><span class="stat-label">SBS:</span><span class="stat-numb">0.81%</span></span>
@@ -379,7 +497,7 @@
             <div class="stat-item">
                 <div class="stat-flag" style="background-image: url('https://flagcdn.com/w320/es.png');"></div>
                 <div class="stat-content">
-                    <span class="stat-lang">Español</span>
+                    <span class="stat-lang">Spanish</span>
                     <span class="stat-meta">es_5K list</span>
                     <div class="stat-values">
                         <span><span class="stat-label">SBS:</span><span class="stat-numb">1.03%</span></span>
@@ -390,137 +508,348 @@
         </div>
 
         <div class="ortho-box">
-            <span class="ortho-title">Visualisation de la grille Rosellæ</span>
+            <span class="ortho-title">Rosellæ Layout by GalileoBlue</span>
             <div class="ortho-grid" id="ortho-grid"></div>
         </div>
     </div>
 </div>
 
-<div class="kb-section layer-all full" id="full-section" data-view="alpha-acc-sym">
-    <div class="layer-title">Toutes les couches (Référence)</div>
-    <div class="kb-wrapper" id="master-svg">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 300">
-            <g id="left">
-                <g class="col_L specialKey">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⎋</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="26" y="26">↹</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="26" y="26">❖</text></g>
-                </g>
-                <g class="col_1">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">B</text><text x="38" y="40" class="sym">~</text><text x="38" y="16" class="acc">ö</text><text x="38" y="40" class="nav">⏮</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">N</text><text x="38" y="40" class="sym">+</text><text x="38" y="16" class="acc">á</text><text x="38" y="40" class="nav">←</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:16px;">QU</text><text x="38" y="40" class="sym">Qu</text><text x="38" y="16" class="acc">q</text><text x="38" y="40" class="nav">1</text></g>
-                </g>
-                <g class="col_2">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">L</text><text x="38" y="40" class="sym">*</text><text x="38" y="16" class="acc">ä</text><text x="38" y="40" class="nav">⏯</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">R</text><text x="38" y="40" class="sym">=</text><text x="38" y="16" class="acc">ú</text><text x="38" y="40" class="nav">↓</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">J</text><text x="38" y="40" class="sym">€</text><text x="38" y="16" class="acc" style="font-size:10px;">undo</text><text x="38" y="40" class="nav">2</text></g>
-                </g>
-                <g class="col_3">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">D</text><text x="38" y="40" class="sym">[</text><text x="38" y="16" class="acc">ü</text><text x="38" y="40" class="nav">⏭</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">T</text><text x="38" y="40" class="sym">(</text><text x="38" y="16" class="acc">í</text><text x="38" y="40" class="nav">↑</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">M</text><text x="38" y="40" class="sym">{</text><text x="38" y="16" class="acc" style="font-size:10px;">redo</text><text x="38" y="40" class="nav">3</text></g>
-                </g>
-                <g class="col_4">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">C</text><text x="38" y="40" class="sym">]</text><text x="38" y="16" class="acc">ñ</text><text x="38" y="40" class="nav">↘</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">S</text><text x="38" y="40" class="sym">)</text><text x="38" y="16" class="acc">ó</text><text x="38" y="40" class="nav">→</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">G</text><text x="38" y="40" class="sym">}</text><text x="38" y="16" class="acc" style="font-size:10px;">cut</text><text x="38" y="40" class="nav">0</text></g>
-                </g>
-                <g class="col_5">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">V</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc" style="font-size:10px">all</text><text x="38" y="40" class="nav"></text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">F</text><text x="38" y="40" class="sym">`</text><text x="38" y="16" class="acc" style="font-size:10px;">paste</text><text x="38" y="40" class="nav">⇟</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">W</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc" style="font-size:10px;">copy</text><text x="38" y="40" class="nav">%</text></g>
-                </g>
-                <g class="col_mid_L specialKey">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="26"/><text x="26" y="26">Vol</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="6"/><text x="26" y="26">Scr</text></g>
-                </g>
-                <g class="thb_3" id="acc-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" class="acc-star">★</text></g></g>
-                <g class="thb_4" id="shift-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26">Shift</text></g></g>
-                <g class="thb_5" id="ctrl-key"><g><rect width="52" height="82" rx="5"/><text x="26" y="41">Ctrl</text></g></g>
-            </g>
-            <g id="right">
-                <g class="col_mid_R specialKey">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="26"/><text x="26" y="26">Lum</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="6"/><text x="26" y="26">Alt</text></g>
-                </g>
-                <g class="col_6">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Z</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc"></text><text x="38" y="40" class="nav"></text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Y</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc">œ</text><text x="38" y="40" class="nav">⇞</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">K</text><text x="38" y="40" class="sym"></text><text x="38" y="16" class="acc">æ</text><text x="38" y="40" class="nav">=</text></g>
-                </g>
-                <g class="col_7">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">"</text><text x="14" y="40" class="level1">'</text><text x="38" y="40" class="sym">&lt;</text><text x="38" y="16" class="acc">î</text><text x="38" y="40" class="nav">↖</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">H</text><text x="38" y="40" class="sym">_</text><text x="38" y="16" class="acc">ç</text><text x="38" y="40" class="nav">,</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">P</text><text x="38" y="40" class="sym">#</text><text x="38" y="16" class="acc">ï</text><text x="38" y="40" class="nav">7</text></g>
-                </g>
-                <g class="col_8">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">O</text><text x="38" y="40" class="sym">&gt;</text><text x="38" y="16" class="acc">ê</text><text x="38" y="40" class="nav">f2</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">E</text><text x="38" y="40" class="sym">@</text><text x="38" y="16" class="acc">à</text><text x="38" y="40" class="nav">4</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">?</text><text x="14" y="40" class="level1">,</text><text x="38" y="40" class="sym">%</text><text x="38" y="16" class="acc">ô</text><text x="38" y="40" class="nav">8</text></g>
-                </g>
-                <g class="col_9">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">U</text><text x="38" y="40" class="sym">\</text><text x="38" y="16" class="acc">ù</text><text x="38" y="40" class="nav">f4</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">I</text><text x="38" y="40" class="sym">/</text><text x="38" y="16" class="acc">è</text><text x="38" y="40" class="nav">5</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">!</text><text x="14" y="40" class="level1">.</text><text x="38" y="40" class="sym">|</text><text x="38" y="16" class="acc">â</text><text x="38" y="40" class="nav">9</text></g>
-                </g>
-                <g class="col_0">
-                    <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">X</text><text x="38" y="40" class="sym">$</text><text x="38" y="16" class="acc">û</text><text x="38" y="40" class="nav">f11</text></g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">A</text><text x="38" y="40" class="sym">-</text><text x="38" y="16" class="acc">é</text><text x="38" y="40" class="nav">6</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">;</text><text x="14" y="40" class="level1">:</text><text x="38" y="40" class="sym">&amp;</text><text x="38" y="16" class="acc">ë</text><text x="38" y="40" class="nav">.</text></g>
-                </g>
-                <g class="col_R specialKey">
-                    <g transform="translate(0 0)">
-                        <rect width="52" height="52" rx="5"/>
-                        <text x="26" y="26" class="backspace-text">⌫</text>
-                        <text x="26" y="26" class="delete-text">Sup</text>
-                    </g>
-                    <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⏎</text></g>
-                    <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⌃⇧</text></g>
-                </g>
-                <g class="thb_6" id="sym-key"><g><rect width="52" height="82" rx="5"/><text x="26" y="41" style="font-size:15px;">AltGr</text></g></g>
-                <g class="thb_7 specialKey"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:18px;">⎵</text></g></g>
-                <g class="thb_8" id="nav-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:12px;">Nav</text></g></g>
-            </g>
-        </svg>
+<div class="kb-section layer-all full" id="full-section" data-view="sym">
+    <div class="layer-header-container">
+        <div class="layer-title">All Layers (Reference)</div>
+        <div class="switch-group">
+            <button class="ctrl-btn active" id="btn-corne" onclick="setGeometry('corne')">Corne | 46-keys</button>
+            <button class="ctrl-btn" id="btn-piantor" onclick="setGeometry('piantor')">Piantor | 42-keys</button>
+            <button class="ctrl-btn" id="btn-rowstag" onclick="setGeometry('rowstag')">Classic ISO | Min. 39-keys</button>
+        </div>
     </div>
 
-    <div class="layout-switcher">
-        <button class="ctrl-btn" id="view-acc" onclick="setView('alpha-acc')">Alpha + Accent</button>
-        <button class="ctrl-btn active" id="view-sym" onclick="setView('alpha-acc-sym')">Alpha + Accent + AltGR</button>
-        <button class="ctrl-btn" id="view-nav" onclick="setView('alpha-acc-nav')">Alpha + Accent + Nav</button>
+    <div class="kb-wrapper master-container"></div>
+
+    <div class="controls-center">
+        <div class="switch-group">
+            <button class="ctrl-btn active" id="view-sym" onclick="setView('sym')">AltGr (Symbols)</button>
+            <button class="ctrl-btn" id="view-nav" onclick="setView('nav')">Nav (Navigation)</button>
+        </div>
     </div>
 </div>
 
 <div class="layers-grid">
     <div class="kb-section layer-normal">
-        <div class="layer-title">1. Alpha Layer</div>
+        <div class="layer-header-container">
+            <div class="layer-title">1. Alpha Layer</div>
+        </div>
         <div class="kb-wrapper target"></div>
     </div>
     <div class="kb-section layer-acc">
-        <div class="layer-title">
-            2. Accents Layer (★)
-            <span class="layer-subtitle">One Shot Layer</span>
+        <div class="layer-header-container">
+            <div class="layer-title">
+                2. Accents Layer (★)
+                <span class="layer-subtitle">One Shot Layer</span>
+            </div>
         </div>
         <div class="kb-wrapper target"></div>
     </div>
     <div class="kb-section layer-sym">
-        <div class="layer-title">
-            3. Symbol Layer (AltGr)
-            <span class="layer-subtitle">One Shot Layer</span>
+        <div class="layer-header-container">
+            <div class="layer-title">
+                3. Symbols Layer (AltGr)
+                <span class="layer-subtitle">One Shot Layer</span>
+            </div>
         </div>
         <div class="kb-wrapper target"></div>
     </div>
     <div class="kb-section layer-nav">
-        <div class="layer-title">
-            4. Navigation Layer (Nav)
-            <span class="layer-subtitle">Momentary Layer</span>
+        <div class="layer-header-container">
+            <div class="layer-title">
+                4. Navigation Layer (Nav)
+                <span class="layer-subtitle">Momentary (Hold Space)</span>
+            </div>
         </div>
         <div class="kb-wrapper target"></div>
     </div>
 </div>
 
+<!-- HIDDEN VECTOR TEMPLATES (IDENTICAL 1080x320 CANVAS) -->
+<div style="display:none;">
+
+    <!-- 1. CORNE TEMPLATE -->
+    <svg id="tpl-corne" viewBox="0 0 1080 320" xmlns="http://www.w3.org/2000/svg">
+        <g id="left">
+            <g class="col_L specialKey">
+                <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⎋</text></g>
+                <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="26" y="26">↹</text></g>
+                <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="26" y="26">❖</text></g>
+            </g>
+            <g class="col_1">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">B</text><text x="38" y="38" class="sym">~</text><text x="36" y="16" class="acc">^z</text><text x="38" y="38" class="nav">⏮</text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">N</text><text x="38" y="38" class="sym">+</text><text x="38" y="16" class="acc">æ</text><text x="38" y="38" class="nav">←</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1" style="font-size:14px;">QU</text><text x="38" y="38" class="sym">Qu</text><text x="38" y="16" class="acc">q</text><text x="38" y="38" class="nav">1</text></g>
+            </g>
+            <g class="col_2">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">L</text><text x="38" y="38" class="sym">*</text><text x="36" y="16" class="acc">^y</text><text x="38" y="38" class="nav">⏯</text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">R</text><text x="38" y="38" class="sym">=</text><text x="38" y="16" class="acc">ñ</text><text x="38" y="38" class="nav">↓</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">J</text><text x="38" y="38" class="sym">€</text><text x="36" y="16" class="acc">^x</text><text x="38" y="38" class="nav">2</text></g>
+            </g>
+            <g class="col_3">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">D</text><text x="38" y="38" class="sym">[</text><text x="38" y="16" class="acc">ö</text><text x="38" y="38" class="nav">⏭</text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">T</text><text x="38" y="38" class="sym">(</text><text x="38" y="16" class="acc">œ</text><text x="38" y="38" class="nav">↑</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">M</text><text x="38" y="38" class="sym">{</text><text x="36" y="16" class="acc">^c</text><text x="38" y="38" class="nav">3</text></g>
+            </g>
+            <g class="col_4">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">C</text><text x="38" y="38" class="sym">]</text><text x="38" y="16" class="acc">ü</text><text x="38" y="38" class="nav">↘</text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">S</text><text x="38" y="38" class="sym">)</text><text x="38" y="16" class="acc">ë</text><text x="38" y="38" class="nav">→</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">G</text><text x="38" y="38" class="sym">}</text><text x="36" y="16" class="acc">^v</text><text x="38" y="38" class="nav">0</text></g>
+            </g>
+            <g class="col_5">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">V</text><text x="38" y="38" class="sym">^</text><text x="38" y="16" class="acc"></text><text x="38" y="38" class="nav"></text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">F</text><text x="38" y="38" class="sym">`</text><text x="38" y="16" class="acc">ä</text><text x="38" y="38" class="nav">⇟</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">W</text><text x="38" y="38" class="sym"></text><text x="36" y="16" class="acc">^a</text><text x="38" y="38" class="nav">%</text></g>
+            </g>
+            <g class="col_mid_L specialKey">
+                <g transform="translate(0 0)"><rect width="52" height="52" rx="26"/><text x="26" y="26">Vol</text></g>
+                <g transform="translate(0 60)"><rect width="52" height="52" rx="6"/><text x="26" y="26">Scr</text></g>
+            </g>
+            <g class="thb_3" id="acc-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" class="acc-star">★</text></g></g>
+            <g class="thb_4" id="shift-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26">Shift</text></g></g>
+            <g class="thb_5" id="ctrl-key"><g><rect width="52" height="82" rx="5"/><text x="26" y="41">Ctrl</text></g></g>
+        </g>
+        <g id="right">
+            <g class="col_mid_R specialKey">
+                <g transform="translate(0 0)"><rect width="52" height="52" rx="26"/><text x="26" y="26">Bri</text></g>
+                <g transform="translate(0 60)"><rect width="52" height="52" rx="6"/><text x="26" y="26">Alt</text></g>
+            </g>
+            <g class="col_6">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Z</text><text x="38" y="38" class="sym"></text><text x="38" y="16" class="acc">ú</text><text x="38" y="38" class="nav"></text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">Y</text><text x="38" y="38" class="sym"></text><text x="38" y="16" class="acc">ó</text><text x="38" y="38" class="nav">⇞</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">K</text><text x="38" y="38" class="sym"></text><text x="38" y="16" class="acc">í</text><text x="38" y="38" class="nav">=</text></g>
+            </g>
+            <g class="col_7">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">"</text><text x="14" y="38" class="level1">'</text><text x="38" y="38" class="sym">&lt;</text><text x="38" y="16" class="acc">î</text><text x="38" y="38" class="nav">↖</text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">H</text><text x="38" y="38" class="sym">_</text><text x="38" y="16" class="acc">ç</text><text x="38" y="38" class="nav">,</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">P</text><text x="38" y="38" class="sym">#</text><text x="38" y="16" class="acc">â</text><text x="38" y="38" class="nav">7</text></g>
+            </g>
+            <g class="col_8">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">O</text><text x="38" y="38" class="sym">&gt;</text><text x="38" y="16" class="acc">ê</text><text x="38" y="38" class="nav">f2</text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">E</text><text x="38" y="38" class="sym">@</text><text x="38" y="16" class="acc">à</text><text x="38" y="38" class="nav">4</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">?</text><text x="14" y="38" class="level1">,</text><text x="38" y="38" class="sym">%</text><text x="38" y="16" class="acc">ô</text><text x="38" y="38" class="nav">8</text></g>
+            </g>
+            <g class="col_9">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">U</text><text x="38" y="38" class="sym">\</text><text x="38" y="16" class="acc">ù</text><text x="38" y="38" class="nav">f4</text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">I</text><text x="38" y="38" class="sym">/</text><text x="38" y="16" class="acc">è</text><text x="38" y="38" class="nav">5</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">!</text><text x="14" y="38" class="level1">.</text><text x="38" y="38" class="sym">|</text><text x="38" y="16" class="acc">ï</text><text x="38" y="38" class="nav">9</text></g>
+            </g>
+            <g class="col_0">
+                <g class="corne-key" transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">X</text><text x="38" y="38" class="sym">$</text><text x="38" y="16" class="acc">û</text><text x="38" y="38" class="nav">f11</text></g>
+                <g class="corne-key" transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level1">A</text><text x="38" y="38" class="sym">-</text><text x="38" y="16" class="acc">é</text><text x="38" y="38" class="nav">6</text></g>
+                <g class="corne-key" transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="14" y="16" class="level2">;</text><text x="14" y="38" class="level1">:</text><text x="38" y="38" class="sym">&amp;</text><text x="38" y="16" class="acc">á</text><text x="38" y="38" class="nav">.</text></g>
+            </g>
+            <g class="col_R specialKey">
+                <g transform="translate(0 0)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⌫</text></g>
+                <g transform="translate(0 60)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⏎</text></g>
+                <g transform="translate(0 120)"><rect width="52" height="52" rx="5"/><text x="26" y="26">⌃⇧</text></g>
+            </g>
+            <g class="thb_6" id="sym-key"><g><rect width="52" height="82" rx="5"/><text x="26" y="41" style="font-size:14px;">AltGr</text></g></g>
+            <g class="thb_7 specialKey"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:18px;">⎵</text></g></g>
+            <g class="thb_8" id="nav-key"><g><rect width="52" height="52" rx="5"/><text x="26" y="26" style="font-size:12px;">Nav</text></g></g>
+        </g>
+    </svg>
+
+    <!-- 2. PIANTOR TEMPLATE -->
+    <svg id="tpl-piantor" viewBox="0 0 1080 320" xmlns="http://www.w3.org/2000/svg">
+        <g id="piantor-left">
+            <g class="p-col_0 specialKey">
+                <g transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="25" y="25">⎋</text></g>
+                <g transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="25" y="25">↹</text></g>
+                <g transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="25" y="25">❖</text></g>
+            </g>
+            <g class="p-col_1">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">B</text><text x="36" y="36" class="sym">~</text><text x="34" y="16" class="acc">^z</text><text x="36" y="36" class="nav">⏮</text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">N</text><text x="36" y="36" class="sym">+</text><text x="36" y="16" class="acc">æ</text><text x="36" y="36" class="nav">←</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1" style="font-size:14px;">QU</text><text x="36" y="36" class="sym">Qu</text><text x="36" y="16" class="acc">q</text><text x="36" y="36" class="nav">1</text></g>
+            </g>
+            <g class="p-col_2">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">L</text><text x="36" y="36" class="sym">*</text><text x="34" y="16" class="acc">^y</text><text x="36" y="36" class="nav">⏯</text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">R</text><text x="36" y="36" class="sym">=</text><text x="36" y="16" class="acc">ñ</text><text x="36" y="36" class="nav">↓</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">J</text><text x="36" y="36" class="sym">€</text><text x="34" y="16" class="acc">^x</text><text x="36" y="36" class="nav">2</text></g>
+            </g>
+            <g class="p-col_3">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">D</text><text x="36" y="36" class="sym">[</text><text x="36" y="16" class="acc">ö</text><text x="36" y="36" class="nav">⏭</text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">T</text><text x="36" y="36" class="sym">(</text><text x="36" y="16" class="acc">œ</text><text x="36" y="38" class="nav">↑</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">M</text><text x="36" y="36" class="sym">{</text><text x="34" y="16" class="acc">^c</text><text x="36" y="36" class="nav">3</text></g>
+            </g>
+            <g class="p-col_4">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">C</text><text x="36" y="36" class="sym">]</text><text x="36" y="16" class="acc">ü</text><text x="36" y="36" class="nav">↘</text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">S</text><text x="36" y="36" class="sym">)</text><text x="36" y="16" class="acc">ë</text><text x="36" y="36" class="nav">→</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">G</text><text x="36" y="36" class="sym">}</text><text x="34" y="16" class="acc">^v</text><text x="36" y="36" class="nav">0</text></g>
+            </g>
+            <g class="p-col_5">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">V</text><text x="36" y="36" class="sym">^</text><text x="36" y="16" class="acc"></text><text x="36" y="36" class="nav"></text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">F</text><text x="36" y="36" class="sym">`</text><text x="36" y="16" class="acc">ä</text><text x="36" y="36" class="nav">⇟</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">W</text><text x="36" y="36" class="sym"></text><text x="34" y="16" class="acc">^a</text><text x="36" y="36" class="nav">%</text></g>
+            </g>
+            <g class="p-thb_1" id="acc-key"><rect width="50" height="50" rx="6"/><text x="25" y="25" class="acc-star">★</text></g>
+            <g class="p-thb_2 specialKey"><rect width="50" height="50" rx="6"/><text x="25" y="25">Shift</text></g>
+            <g class="p-thb_3 specialKey"><rect width="50" height="50" rx="6"/><text x="25" y="25">Ctrl</text></g>
+        </g>
+
+        <g id="piantor-right">
+            <g class="p-col_6">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">Z</text><text x="36" y="36" class="sym"></text><text x="36" y="16" class="acc">ú</text><text x="36" y="36" class="nav"></text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">Y</text><text x="36" y="36" class="sym"></text><text x="36" y="16" class="acc">ó</text><text x="36" y="36" class="nav">⇞</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">K</text><text x="36" y="36" class="sym"></text><text x="36" y="16" class="acc">í</text><text x="36" y="36" class="nav">=</text></g>
+            </g>
+            <g class="p-col_7">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level2">"</text><text x="14" y="36" class="level1">'</text><text x="36" y="36" class="sym">&lt;</text><text x="36" y="16" class="acc">î</text><text x="36" y="36" class="nav">↖</text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">H</text><text x="36" y="36" class="sym">_</text><text x="36" y="16" class="acc">ç</text><text x="36" y="36" class="nav">,</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">P</text><text x="36" y="36" class="sym">#</text><text x="36" y="16" class="acc">â</text><text x="36" y="36" class="nav">7</text></g>
+            </g>
+            <g class="p-col_8">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">O</text><text x="36" y="36" class="sym">&gt;</text><text x="36" y="16" class="acc">ê</text><text x="36" y="36" class="nav">f2</text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">E</text><text x="36" y="36" class="sym">@</text><text x="36" y="16" class="acc">à</text><text x="36" y="36" class="nav">4</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level2">?</text><text x="14" y="36" class="level1">,</text><text x="36" y="36" class="sym">%</text><text x="36" y="16" class="acc">ô</text><text x="36" y="36" class="nav">8</text></g>
+            </g>
+            <g class="p-col_9">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">U</text><text x="36" y="36" class="sym">\</text><text x="36" y="16" class="acc">ù</text><text x="36" y="36" class="nav">f4</text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">I</text><text x="36" y="36" class="sym">/</text><text x="36" y="16" class="acc">è</text><text x="36" y="36" class="nav">5</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level2">!</text><text x="14" y="36" class="level1">.</text><text x="36" y="36" class="sym">|</text><text x="36" y="16" class="acc">ï</text><text x="36" y="36" class="nav">9</text></g>
+            </g>
+            <g class="p-col_10">
+                <g class="corne-key" transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">X</text><text x="36" y="36" class="sym">$</text><text x="36" y="16" class="acc">û</text><text x="36" y="36" class="nav">f11</text></g>
+                <g class="corne-key" transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level1">A</text><text x="36" y="36" class="sym">-</text><text x="36" y="16" class="acc">é</text><text x="36" y="36" class="nav">6</text></g>
+                <g class="corne-key" transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="14" y="16" class="level2">;</text><text x="14" y="36" class="level1">:</text><text x="36" y="36" class="sym">&amp;</text><text x="36" y="16" class="acc">á</text><text x="36" y="36" class="nav">.</text></g>
+            </g>
+            <g class="p-col_11 specialKey">
+                <g transform="translate(0 0)"><rect width="50" height="50" rx="6"/><text x="25" y="25">⌫</text></g>
+                <g transform="translate(0 56)"><rect width="50" height="50" rx="6"/><text x="25" y="25">⏎</text></g>
+                <g transform="translate(0 112)"><rect width="50" height="50" rx="6"/><text x="25" y="25">⌃⇧</text></g>
+            </g>
+            <g class="p-thb_4 specialKey" id="nav-key"><rect width="50" height="50" rx="6"/><text x="25" y="25" style="font-size:12px;">Nav</text></g>
+            <g class="p-thb_5 specialKey"><rect width="50" height="50" rx="6"/><text x="25" y="25" style="font-size:18px;">⎵</text></g>
+            <g class="p-thb_6" id="sym-key"><rect width="50" height="50" rx="6"/><text x="25" y="25" style="font-size:13px;">AltGr</text></g>
+        </g>
+    </svg>
+
+    <!-- 3. CLASSIC ISO TEMPLATE -->
+    <svg id="tpl-rowstag" viewBox="0 0 1080 320" xmlns="http://www.w3.org/2000/svg">
+        <g id="rowstag-wrapper">
+            <g id="row_AE">
+                <g class="specialKey onoff-key"><rect width="48" height="46" rx="4"/><text x="24" y="23">On/Off</text></g>
+                <g class="key-unused" transform="translate(53)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(106)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(159)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(212)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(265)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(318)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(371)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(424)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(477)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(530)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(583)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(636)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(689)"><rect width="85" height="46" rx="4"/><text x="42" y="23">×</text></g>
+            </g>
+
+            <g id="row_AD">
+                <g class="specialKey"><rect width="72" height="46" rx="4"/><text x="36" y="23">⎋ Esc</text></g>
+                <g class="rowstag-key" transform="translate(77)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">B</text><text x="35" y="34" class="sym">~</text><text x="33" y="15" class="acc">^z</text><text x="35" y="34" class="nav">⏮</text></g>
+                <g class="rowstag-key" transform="translate(130)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">L</text><text x="35" y="34" class="sym">*</text><text x="33" y="15" class="acc">^y</text><text x="35" y="34" class="nav">⏯</text></g>
+                <g class="rowstag-key" transform="translate(183)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">D</text><text x="35" y="34" class="sym">[</text><text x="35" y="15" class="acc">ö</text><text x="35" y="34" class="nav">⏭</text></g>
+                <g class="rowstag-key" transform="translate(236)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">C</text><text x="35" y="34" class="sym">]</text><text x="35" y="15" class="acc">ü</text><text x="35" y="34" class="nav">↘</text></g>
+                <g class="rowstag-key" transform="translate(289)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">V</text><text x="35" y="34" class="sym">^</text><text x="35" y="15" class="acc"></text><text x="35" y="34" class="nav"></text></g>
+                <g class="rowstag-key" transform="translate(342)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">Z</text><text x="35" y="34" class="sym"></text><text x="35" y="15" class="acc">ú</text><text x="35" y="34" class="nav"></text></g>
+                <g class="rowstag-key" transform="translate(395)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level2">"</text><text x="14" y="34" class="level1">'</text><text x="35" y="34" class="sym">&lt;</text><text x="35" y="15" class="acc">î</text><text x="35" y="34" class="nav">↖</text></g>
+                <g class="rowstag-key" transform="translate(448)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">O</text><text x="35" y="34" class="sym">&gt;</text><text x="35" y="15" class="acc">ê</text><text x="35" y="34" class="nav">f2</text></g>
+                <g class="rowstag-key" transform="translate(501)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">U</text><text x="35" y="34" class="sym">\</text><text x="35" y="15" class="acc">ù</text><text x="35" y="34" class="nav">f4</text></g>
+                <g class="rowstag-key" transform="translate(554)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">X</text><text x="35" y="34" class="sym">$</text><text x="35" y="15" class="acc">û</text><text x="35" y="34" class="nav">f11</text></g>
+                <g class="specialKey" transform="translate(607)"><rect width="48" height="46" rx="4"/><text x="24" y="23" style="font-size:16px;">⌫</text></g>
+                <g class="key-unused" transform="translate(660)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(713)">
+                    <path d="M0,0 h61 a4,4 0 0,1 4,4 v92 a4,4 0 0,1 -4,4 h-30 a4,4 0 0,1 -4,-4 v-44 a4,4 0 0,0 -4,-4 h-23 a4,4 0 0,1 -4,-4 v-44 a4,4 0 0,1 4,-4 z"/>
+                    <text x="34" y="50">×</text>
+                </g>
+            </g>
+
+            <g id="row_AC">
+                <g class="specialKey"><rect width="88" height="46" rx="4"/><text x="44" y="23">↹ Tab</text></g>
+                <g class="rowstag-key" transform="translate(93)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">N</text><text x="35" y="34" class="sym">+</text><text x="35" y="15" class="acc">æ</text><text x="35" y="34" class="nav">←</text></g>
+                <g class="rowstag-key" transform="translate(146)">
+                    <rect width="48" height="46" rx="4"/>
+                    <text x="14" y="15" class="level1">R</text><text x="35" y="34" class="sym">=</text><text x="35" y="15" class="acc">ñ</text><text x="35" y="34" class="nav">↓</text>
+                    <g class="hold-box" transform="translate(5, 27)"><rect width="16" height="15" rx="3"/><text x="8" y="7">❖</text></g>
+                </g>
+                <g class="rowstag-key" transform="translate(199)">
+                    <rect width="48" height="46" rx="4"/>
+                    <text x="14" y="15" class="level1">T</text><text x="35" y="34" class="sym">(</text><text x="35" y="15" class="acc">œ</text><text x="35" y="34" class="nav">↑</text>
+                    <g class="hold-box" transform="translate(5, 27)"><rect width="16" height="15" rx="3"/><text x="8" y="9" style="font-size:12px !important;">^</text></g>
+                </g>
+                <g class="rowstag-key" transform="translate(252)">
+                    <rect width="48" height="46" rx="4"/>
+                    <text x="14" y="15" class="level1">S</text><text x="35" y="34" class="sym">)</text><text x="35" y="15" class="acc">ë</text><text x="35" y="34" class="nav">→</text>
+                    <g class="hold-box" transform="translate(5, 27)"><rect width="16" height="15" rx="3"/><text x="8" y="8">⌥</text></g>
+                </g>
+                <g class="rowstag-key" transform="translate(305)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">F</text><text x="35" y="34" class="sym">`</text><text x="35" y="15" class="acc">ä</text><text x="35" y="34" class="nav">⇟</text></g>
+                <g class="rowstag-key" transform="translate(358)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">Y</text><text x="35" y="34" class="sym"></text><text x="35" y="15" class="acc">ó</text><text x="35" y="34" class="nav">⇞</text></g>
+                <g class="rowstag-key" transform="translate(411)">
+                    <rect width="48" height="46" rx="4"/>
+                    <text x="14" y="15" class="level1">H</text><text x="35" y="34" class="sym">_</text><text x="35" y="15" class="acc">ç</text><text x="35" y="34" class="nav">,</text>
+                    <g class="hold-box" transform="translate(5, 27)"><rect width="16" height="15" rx="3"/><text x="8" y="8">⌥</text></g>
+                </g>
+                <g class="rowstag-key" transform="translate(464)">
+                    <rect width="48" height="46" rx="4"/>
+                    <text x="14" y="15" class="level1">E</text><text x="35" y="34" class="sym">@</text><text x="35" y="15" class="acc">à</text><text x="35" y="34" class="nav">4</text>
+                    <g class="hold-box" transform="translate(5, 27)"><rect width="16" height="15" rx="3"/><text x="8" y="9" style="font-size:12px !important;">^</text></g>
+                </g>
+                <g class="rowstag-key" transform="translate(517)">
+                    <rect width="48" height="46" rx="4"/>
+                    <text x="14" y="15" class="level1">I</text><text x="35" y="34" class="sym">/</text><text x="35" y="15" class="acc">è</text><text x="35" y="34" class="nav">5</text>
+                    <g class="hold-box" transform="translate(5, 27)"><rect width="16" height="15" rx="3"/><text x="8" y="7">❖</text></g>
+                </g>
+                <g class="rowstag-key" transform="translate(570)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">A</text><text x="35" y="34" class="sym">-</text><text x="35" y="15" class="acc">é</text><text x="35" y="34" class="nav">6</text></g>
+                <g class="specialKey" transform="translate(623)"><rect width="48" height="46" rx="4"/><text x="24" y="23" style="font-size:12px;">⏎ Enter</text></g>
+                <g class="key-unused" transform="translate(676)"><rect width="46" height="46" rx="4"/><text x="23" y="23">×</text></g>
+            </g>
+
+            <g id="row_AB">
+                <g class="key-unused"><rect width="66" height="46" rx="4"/><text x="33" y="23">×</text></g>
+                <g class="rowstag-key" transform="translate(71)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1" style="font-size:14px;">QU</text><text x="35" y="34" class="sym">Qu</text><text x="35" y="15" class="acc">q</text><text x="35" y="34" class="nav">1</text></g>
+                <g class="rowstag-key" transform="translate(124)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">J</text><text x="35" y="34" class="sym">€</text><text x="33" y="15" class="acc">^x</text><text x="35" y="34" class="nav">2</text></g>
+                <g class="rowstag-key" transform="translate(177)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">M</text><text x="35" y="34" class="sym">{</text><text x="33" y="15" class="acc">^c</text><text x="35" y="34" class="nav">3</text></g>
+                <g class="rowstag-key" transform="translate(230)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">G</text><text x="35" y="34" class="sym">}</text><text x="33" y="15" class="acc">^v</text><text x="35" y="34" class="nav">0</text></g>
+                <g class="rowstag-key" transform="translate(283)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">W</text><text x="35" y="34" class="sym"></text><text x="33" y="15" class="acc">^a</text><text x="35" y="34" class="nav">%</text></g>
+                <g class="key-unused" transform="translate(336)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="rowstag-key" transform="translate(389)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">K</text><text x="35" y="34" class="sym"></text><text x="35" y="15" class="acc">í</text><text x="35" y="34" class="nav">=</text></g>
+                <g class="rowstag-key" transform="translate(442)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level1">P</text><text x="35" y="34" class="sym">#</text><text x="35" y="15" class="acc">â</text><text x="35" y="34" class="nav">7</text></g>
+                <g class="rowstag-key" transform="translate(495)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level2">?</text><text x="14" y="34" class="level1">,</text><text x="35" y="34" class="sym">%</text><text x="35" y="15" class="acc">ô</text><text x="35" y="34" class="nav">8</text></g>
+                <g class="rowstag-key" transform="translate(548)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level2">!</text><text x="14" y="34" class="level1">.</text><text x="35" y="34" class="sym">|</text><text x="35" y="15" class="acc">ï</text><text x="35" y="34" class="nav">9</text></g>
+                <g class="rowstag-key" transform="translate(601)"><rect width="48" height="46" rx="4"/><text x="14" y="15" class="level2">;</text><text x="14" y="34" class="level1">:</text><text x="35" y="34" class="sym">&amp;</text><text x="35" y="15" class="acc">á</text><text x="35" y="34" class="nav">.</text></g>
+                <g class="key-unused" transform="translate(654)"><rect width="120" height="46" rx="4"/><text x="60" y="23">⇧</text></g>
+            </g>
+
+            <g id="row_AA">
+                <g class="key-unused"><rect width="50" height="46" rx="4"/><text x="25" y="23">×</text></g>
+                <g class="key-unused" transform="translate(55)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="rowstag-key acc-key" id="acc-key" transform="translate(108)"><rect width="48" height="46" rx="4"/><text x="24" y="23" class="acc-star">★</text></g>
+                <g class="specialKey" transform="translate(161)"><rect width="48" height="46" rx="4"/><text x="24" y="23">⇧ Shift</text></g>
+                <g class="specialKey" transform="translate(214)">
+                    <rect width="297" height="46" rx="4"/>
+                    <text x="148" y="17" style="font-size:12px; font-weight:700;">Space</text>
+                    <g class="hold-pill nav-pill" transform="translate(113, 26)"><rect width="70" height="16" rx="4"/><text x="35" y="8">NAV</text></g>
+                </g>
+                <g class="specialKey sym-key" id="sym-key" transform="translate(516)"><rect width="48" height="46" rx="4"/><text x="24" y="23">AltGr</text></g>
+                <g class="key-unused" transform="translate(569)"><rect width="48" height="46" rx="4"/><text x="24" y="23">×</text></g>
+                <g class="key-unused" transform="translate(622)"><rect width="47" height="46" rx="4"/><text x="23" y="23">×</text></g>
+                <g class="key-unused" transform="translate(674)"><rect width="48" height="21" rx="4"/><text x="24" y="10">×</text></g>
+                <g class="key-unused" transform="translate(674, 25)"><rect width="48" height="21" rx="4"/><text x="24" y="10">×</text></g>
+                <g class="key-unused" transform="translate(727)"><rect width="47" height="46" rx="4"/><text x="23" y="23">×</text></g>
+            </g>
+        </g>
+    </svg>
+</div>
+
 <script>
+    let currentGeometry = 'corne';
+
     function setTheme(theme) {
         const body = document.body;
         const btnDark = document.getElementById('btn-dark');
@@ -543,10 +872,56 @@
         const section = document.getElementById('full-section');
         section.setAttribute('data-view', view);
 
-        document.querySelectorAll('.layout-switcher .ctrl-btn').forEach(btn => btn.classList.remove('active'));
-        if(view === 'alpha-acc') document.getElementById('view-acc').classList.add('active');
-        if(view === 'alpha-acc-sym') document.getElementById('view-sym').classList.add('active');
-        if(view === 'alpha-acc-nav') document.getElementById('view-nav').classList.add('active');
+        const btnSym = document.getElementById('view-sym');
+        const btnNav = document.getElementById('view-nav');
+
+        if (view === 'sym') {
+            btnSym.classList.add('active');
+            btnNav.classList.remove('active');
+        } else {
+            btnNav.classList.add('active');
+            btnSym.classList.remove('active');
+        }
+    }
+
+    function setGeometry(geom) {
+        currentGeometry = geom;
+        const btnCorne = document.getElementById('btn-corne');
+        const btnPiantor = document.getElementById('btn-piantor');
+        const btnRowstag = document.getElementById('btn-rowstag');
+        const badge = document.getElementById('layout-badge');
+
+        btnCorne.classList.remove('active');
+        btnPiantor.classList.remove('active');
+        btnRowstag.classList.remove('active');
+
+        if (geom === 'corne') {
+            btnCorne.classList.add('active');
+            badge.innerText = "Corne | 46-keys";
+        } else if (geom === 'piantor') {
+            btnPiantor.classList.add('active');
+            badge.innerText = "Piantor | 42-keys";
+        } else {
+            btnRowstag.classList.add('active');
+            badge.innerText = "Classic ISO | Min. 39-keys";
+        }
+        renderKeyboards();
+    }
+
+    function renderKeyboards() {
+        let templateId = 'tpl-corne';
+        if (currentGeometry === 'piantor') templateId = 'tpl-piantor';
+        else if (currentGeometry === 'rowstag') templateId = 'tpl-rowstag';
+
+        const svgContent = document.getElementById(templateId).outerHTML;
+
+        // Master reference layer update
+        document.querySelector('.master-container').innerHTML = svgContent;
+
+        // Individual layers update
+        document.querySelectorAll('.target').forEach(el => {
+            el.innerHTML = svgContent;
+        });
     }
 
     if (localStorage.getItem('theme') === 'light') setTheme('light');
@@ -575,10 +950,7 @@
     }
 
     renderOrtho();
-    const masterHTML = document.getElementById('master-svg').innerHTML;
-    document.querySelectorAll('.target').forEach(el => {
-        el.innerHTML = masterHTML; // On injecte directement le contenu
-    });
+    renderKeyboards();
 </script>
 </body>
 </html>
